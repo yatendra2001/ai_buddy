@@ -1,0 +1,36 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Dart
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # Flutter Actions
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Formatting Check
+      - name: Verify formatting
+        run: dart format -o none --set-exit-if-changed lib
+
+      # Analyze Code
+      - name: Analyze project source
+        run: flutter analyze
