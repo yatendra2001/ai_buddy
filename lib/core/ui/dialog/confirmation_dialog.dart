@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:ai_buddy/core/extension/context.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ai_buddy/core/extension/context.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   const ConfirmationDialog({

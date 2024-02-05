@@ -3,9 +3,9 @@ import 'package:url_launcher/url_launcher.dart';
 class Urls {
   Urls._();
 
-  static const _termsOfService = 'https://scalableflutterapp.com/';
-  static const _privacyPolicy = 'https://scalableflutterapp.com/';
-  static const _buyPro = 'https://scalableflutterapp.com/';
+  static const _termsOfService = 'https://AIBuddy.com/';
+  static const _privacyPolicy = 'https://AIBuddy.com/';
+  static const _buyPro = 'https://AIBuddy.com/';
 
   static void showTermsOfService() => _show(_termsOfService);
 

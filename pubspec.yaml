@@ -23,6 +23,8 @@ dependencies:
 
   # iOS
   cupertino_icons: ^1.0.2
+  hive: ^2.2.3
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:

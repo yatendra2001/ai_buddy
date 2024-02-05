@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ai_buddy/core/extension/context.dart';
+import 'package:flutter/material.dart';
 
 class LabeledTextButton extends StatelessWidget {
   const LabeledTextButton({

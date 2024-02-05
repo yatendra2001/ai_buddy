@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final lightTheme = _getTheme();
+final darkTheme = _getTheme();
 
 const _primary = Colors.indigo;
 const _secondary = Colors.amber;
 
-const _background = Color(0xFFF5F5F5);
+const _background = Color(0xFF303030);
 const _lightest = Colors.white;
 const _darkest = Colors.black;
-const _darker = Colors.black87;
 const _divider = Colors.grey;
 const _disabled = Colors.grey;
 
 const _red = Colors.red;
 
-final _lightColorScheme = ColorScheme(
-  brightness: Brightness.light,
+final _darkColorScheme = ColorScheme(
+  brightness: Brightness.dark,
   // Primary
   primary: _primary,
   onPrimary: _lightest,
@@ -24,24 +23,24 @@ final _lightColorScheme = ColorScheme(
   onPrimaryContainer: _lightest,
   // Secondary
   secondary: _secondary,
-  onSecondary: _darkest,
+  onSecondary: _lightest,
   secondaryContainer: _secondary.withOpacity(0.2),
-  onSecondaryContainer: _darkest,
+  onSecondaryContainer: _lightest,
   // Error
   error: _red,
   onError: _lightest,
   // Background
   background: _background,
-  onBackground: _darkest,
+  onBackground: _lightest,
   // Surface
-  surface: _lightest,
-  onSurface: _darkest,
+  surface: _darkest,
+  onSurface: _lightest,
   // Outline
   outline: _divider,
 );
 
 ThemeData _getTheme() {
-  final colorScheme = _lightColorScheme;
+  final colorScheme = _darkColorScheme;
   final textTheme = _getTextTheme(colorScheme);
   final primaryTextTheme = textTheme.apply(
     displayColor: colorScheme.onPrimary,
@@ -59,7 +58,7 @@ ThemeData _getTheme() {
 
   return ThemeData(
     useMaterial3: true,
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     colorScheme: colorScheme,
     textTheme: textTheme,
     primaryTextTheme: primaryTextTheme,
@@ -124,7 +123,7 @@ ThemeData _getTheme() {
     ),
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      backgroundColor: _darkest,
+      backgroundColor: _lightest,
       contentTextStyle: primaryTextTheme.bodyLarge,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -146,13 +145,13 @@ ThemeData _getTheme() {
       ),
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.bodyLarge!.copyWith(
-        color: Colors.black38,
+        color: Colors.white70,
         fontWeight: FontWeight.normal,
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: colorScheme.secondary,
-      foregroundColor: Colors.white,
+      foregroundColor: Colors.black,
       iconSize: 24,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(60),
@@ -193,17 +192,17 @@ ThemeData _getTheme() {
 }
 
 TextTheme _getTextTheme(ColorScheme colorScheme) {
-  const headlineColor = _darker;
+  const headlineColor = _lightest;
   const headlineWeight = FontWeight.w900;
   const headlineHeight = 1.2;
   const headlineLetterSpacing = 2.5;
 
-  const titleColor = _darkest;
+  const titleColor = _lightest;
   const titleWeight = FontWeight.bold;
   const titleHeight = 1.2;
   const titleLetterSpacing = -0.96;
 
-  const bodyColor = _darker;
+  const bodyColor = _lightest;
   const bodyWeight = FontWeight.normal;
   const bodyHeight = 1.5;
   const bodyLetterSpacing = 0.0;

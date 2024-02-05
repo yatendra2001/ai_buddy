@@ -111,7 +111,7 @@ You can find me on:
 
 ## Scalable Flutter App Pro
 
-[Grab Scalable Flutter App - Pro Here](https://scalableflutterapp.com/)
+[Grab Scalable Flutter App - Pro Here](https://AIBuddy.com/)
 
 # Docs
 
@@ -223,7 +223,7 @@ If you don't need a feature:
 ## What if I want more?
 
 If you want Firebase integration, notifications, in-app purchases and more,
-[get the Pro version here](https://scalableflutterapp.com/):
+[get the Pro version here](https://AIBuddy.com/):
 
 # Resources
 

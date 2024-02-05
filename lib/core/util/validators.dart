@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ai_buddy/core/extension/string.dart';
+import 'package:flutter/material.dart';
 
 abstract class Validators {
   Validators._();
