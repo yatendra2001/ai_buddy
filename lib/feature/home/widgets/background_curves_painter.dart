@@ -9,7 +9,7 @@ class BackgroundCurvesPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     // Draw multiple concentric curves
-    for (double i = 0; i < size.height * 0.4; i += 20) {
+    for (double i = 0; i < size.height * 0.9; i += 20) {
       final path = Path()
         ..moveTo(0, i)
         ..quadraticBezierTo(

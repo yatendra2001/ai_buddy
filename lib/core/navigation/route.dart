@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 enum AppRoute {
   splash('/'),
   home('/home'),
+  chat('/chat'),
   ;
 
   const AppRoute(this.path);

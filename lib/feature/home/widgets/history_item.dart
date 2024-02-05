@@ -1,3 +1,4 @@
+import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:flutter/material.dart';
 
 class HistoryItem extends StatelessWidget {
@@ -16,7 +17,9 @@ class HistoryItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          AppRoute.chat.push(context);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).colorScheme.onBackground,
           elevation: 0,

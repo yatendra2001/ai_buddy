@@ -28,6 +28,9 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   fluttericon: ^2.0.0
   lottie: ^3.0.0
+  flutter_chat_ui: ^1.6.12
+  uuid: ^4.3.3
+  flutter_chat_types: ^3.6.2
 
 dev_dependencies:
   flutter_test:
