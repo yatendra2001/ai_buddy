@@ -8,7 +8,7 @@ class GeminiRepository extends BaseGeminiRepository {
   Future<ChatMessage> sendMessage(ChatMessage message) async {
     final response = await http.post(
       Uri.parse(
-          'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY'),
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY',),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'contents': [message.toJson()],

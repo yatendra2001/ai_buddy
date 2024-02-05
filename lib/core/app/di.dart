@@ -1,3 +1,6 @@
+import 'package:ai_buddy/core/repository/gemini/gemini_repository.dart';
+import 'package:ai_buddy/core/repository/storage/hive_repository.dart';
+import 'package:ai_buddy/feature/chat/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,26 +14,10 @@ class DI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ProviderDI(
-      child: _RepositoryDI(
-        child: _BlocDI(
-          child: child,
-        ),
+    return _RepositoryDI(
+      child: _BlocDI(
+        child: child,
       ),
-    );
-  }
-}
-
-class _ProviderDI extends StatelessWidget {
-  const _ProviderDI({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [],
-      child: child,
     );
   }
 }
@@ -43,7 +30,14 @@ class _RepositoryDI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [],
+      providers: [
+        RepositoryProvider<GeminiRepository>(
+          create: (context) => GeminiRepository(),
+        ),
+        RepositoryProvider<HiveRepository>(
+          create: (context) => HiveRepository(),
+        ),
+      ],
       child: child,
     );
   }
@@ -57,7 +51,14 @@ class _BlocDI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [],
+      providers: [
+        BlocProvider<ChatCubit>(
+          create: (context) => ChatCubit(
+            geminiRepository: context.read<GeminiRepository>(),
+            hiveRepository: context.read<HiveRepository>(),
+          ),
+        ),
+      ],
       child: child,
     );
   }

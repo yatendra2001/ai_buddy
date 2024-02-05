@@ -1,6 +1,5 @@
 import 'package:ai_buddy/core/navigation/route.dart';
-import 'package:ai_buddy/feature/home/ui/page/home_page.dart';
-import 'package:ai_buddy/splash_page.dart';
+import 'package:ai_buddy/feature/home/home_page.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(

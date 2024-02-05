@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  ChatCubit(this.geminiRepository, this.hiveRepository) : super(ChatInitial());
+  ChatCubit({required this.geminiRepository, required this.hiveRepository})
+      : super(ChatInitial());
   final GeminiRepository geminiRepository;
   final HiveRepository hiveRepository;
 

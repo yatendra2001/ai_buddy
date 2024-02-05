@@ -3,15 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 
 final darkTheme = _getTheme();
 
-const _primary = Colors.indigo;
-const _secondary = Colors.amber;
+const _primary = Color(0xFFC5F432);
+const _secondary = Color(0xFFC09FF8);
+const _tertiary = Color(0xFFFEC4DD);
 
-const _background = Color(0xFF303030);
-const _lightest = Colors.white;
+const _background = Color(0xFF010201);
+const _onBackground = Color(0xff171717);
+const _lightest = Color(0xffF9FAFB);
+
 const _darkest = Colors.black;
-const _divider = Colors.grey;
 const _disabled = Colors.grey;
 
+const _divider = Color(0xff363635);
 const _red = Colors.red;
 
 final _darkColorScheme = ColorScheme(
@@ -26,12 +29,18 @@ final _darkColorScheme = ColorScheme(
   onSecondary: _lightest,
   secondaryContainer: _secondary.withOpacity(0.2),
   onSecondaryContainer: _lightest,
+  // Secondary
+  tertiary: _tertiary,
+  onTertiary: _lightest,
+  tertiaryContainer: _tertiary.withOpacity(0.2),
+  onTertiaryContainer: _lightest,
+
   // Error
   error: _red,
   onError: _lightest,
   // Background
   background: _background,
-  onBackground: _lightest,
+  onBackground: _onBackground,
   // Surface
   surface: _darkest,
   onSurface: _lightest,
