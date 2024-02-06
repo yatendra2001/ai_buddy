@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/feature/chat/chat_page.dart';
 import 'package:ai_buddy/feature/home/home_page.dart';
@@ -15,7 +17,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: AppRoute.chat.path,
-      builder: (context, state) => const ChatPage(),
+      builder: (context, state) => ChatPage(),
     ),
   ],
 );

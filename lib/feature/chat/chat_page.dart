@@ -1,19 +1,28 @@
+import 'package:ai_buddy/core/logger/logger.dart';
+import 'package:ai_buddy/feature/gemini/src/init.dart';
+import 'package:ai_buddy/feature/gemini/src/models/content/content.dart';
+import 'package:ai_buddy/feature/gemini/src/models/parts/parts.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
-
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
+  final gemini = Gemini.init(apiKey: 'AIzaSyAa6TGCb-8tlgXve9SUkzUOCukWM2rdczg');
   List<types.Message> messages = [];
-  final user = const types.User(id: 'user_id');
+  final user = const types.User(
+    id: 'user_id',
+    firstName: 'AI',
+    lastName: 'Buddy',
+  );
   final uuid = const Uuid();
 
   @override
@@ -31,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
                     colors: [
-                      Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                      Theme.of(context).colorScheme.tertiary.withOpacity(0.3),
                       Theme.of(context).colorScheme.background.withOpacity(0.5),
                     ],
                   ),
@@ -46,52 +55,83 @@ class _ChatPageState extends State<ChatPage> {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 108,
-                        vertical: 8,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            offset: const Offset(4, 4),
-                            blurRadius: 8,
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Personal AI Buddy',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.background,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                      Container(
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.symmetric(vertical: 16),
+                        width: 120,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.tertiary,
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.25),
+                              offset: const Offset(4, 4),
+                              blurRadius: 8,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            'AI Buddy',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.surface,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      const SizedBox(
+                        width: 42,
+                      ),
+                    ],
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 8,
                   ),
                   Expanded(
-                    flex: 12,
                     child: Chat(
                       messages: messages,
                       onSendPressed: _handleSendPressed,
                       user: user,
+                      showUserAvatars: true,
+                      avatarBuilder: (user) => Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.tertiary,
+                          radius: 19,
+                          child: Icon(
+                            FontAwesomeIcons.images,
+                            size: 18,
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                      ),
                       theme: DefaultChatTheme(
                         backgroundColor: Colors.transparent,
-                        primaryColor: Theme.of(context).colorScheme.primary,
-                        secondaryColor: Theme.of(context).colorScheme.secondary,
+                        primaryColor: Theme.of(context).colorScheme.onSurface,
+                        secondaryColor: Theme.of(context).colorScheme.tertiary,
                         inputBackgroundColor:
                             Theme.of(context).colorScheme.onBackground,
                         inputTextColor: Theme.of(context).colorScheme.onSurface,
+                        sendingIcon: Icon(
+                          Icons.send,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        inputTextCursorColor:
+                            Theme.of(context).colorScheme.onSurface,
                         receivedMessageBodyTextStyle: TextStyle(
                           color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 16,
@@ -138,40 +178,64 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  void _handleSendPressed(types.PartialText text) {
+  Future<void> _handleSendPressed(types.PartialText text) async {
     final textMessage = types.TextMessage(
       author: user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: uuid.v4(),
       text: text.text,
     );
-
-    // Simulate sending message
     setState(() {
       messages.insert(0, textMessage);
     });
-
-    // Simulate receiving a response from the Gemini model
-    _simulateGeminiResponse(text.text);
+    _streamGeminiResponse(text.text);
   }
 
-  void _simulateGeminiResponse(String query) {
-    // Placeholder for the response generation logic
-    final responseText = "This is a simulated response to '$query'.";
+  Future<void> _streamGeminiResponse(String query) async {
+    final content = Content(parts: [Parts(text: query)]);
+    final responseStream = gemini.streamChat([content]);
 
-    final responseMessage = types.TextMessage(
-      author: const types.User(id: 'gemini_model'),
-      createdAt: DateTime.now().millisecondsSinceEpoch +
-          1, // Ensure it comes after the user's message
-      id: uuid.v4(),
-      text: responseText,
+    // Placeholder message ID
+    final String placeholderMessageId = uuid.v4();
+
+    // Insert a placeholder message
+    final placeholderMessage = types.TextMessage(
+      author: const types.User(id: 'gemini_id'),
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: placeholderMessageId,
+      text: "Waiting for response...",
     );
 
-    // Simulate a slight delay in receiving the response
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        messages.insert(0, responseMessage);
-      });
+    setState(() {
+      messages.insert(0, placeholderMessage);
+    });
+
+    final StringBuffer fullResponseText = StringBuffer();
+
+    responseStream.listen((response) {
+      if (response.content!.parts!.isNotEmpty) {
+        // Append new text to the full response text
+        fullResponseText.write(response.content!.parts!.first.text);
+
+        // Find the placeholder message in the list and update its text
+        final int messageIndex =
+            messages.indexWhere((msg) => msg.id == placeholderMessageId);
+        if (messageIndex != -1) {
+          final updatedMessage = types.TextMessage(
+            author: messages[messageIndex].author,
+            createdAt: messages[messageIndex].createdAt,
+            id: messages[messageIndex].id,
+            text: fullResponseText.toString(),
+          );
+
+          setState(() {
+            messages[messageIndex] = updatedMessage;
+          });
+        }
+      }
+    }).onError((error) {
+      logError('Error in response stream $error');
+      // Optionally update the placeholder message to indicate an error
     });
   }
 }
