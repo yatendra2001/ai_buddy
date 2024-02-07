@@ -12,7 +12,7 @@ part of 'parts.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Parts _$PartsFromJson(Map<String, dynamic> json) {
   return _Parts.fromJson(json);
@@ -20,10 +20,7 @@ Parts _$PartsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Parts {
-  @JsonKey(name: 'text')
   String? get text => throw _privateConstructorUsedError;
-  @JsonKey(name: 'text')
-  set text(String? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +32,7 @@ abstract class $PartsCopyWith<$Res> {
   factory $PartsCopyWith(Parts value, $Res Function(Parts) then) =
       _$PartsCopyWithImpl<$Res, Parts>;
   @useResult
-  $Res call({@JsonKey(name: 'text') String? text});
+  $Res call({String? text});
 }
 
 /// @nodoc
@@ -69,7 +66,7 @@ abstract class _$$PartsImplCopyWith<$Res> implements $PartsCopyWith<$Res> {
       __$$PartsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'text') String? text});
+  $Res call({String? text});
 }
 
 /// @nodoc
@@ -97,14 +94,13 @@ class __$$PartsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PartsImpl with DiagnosticableTreeMixin implements _Parts {
-  _$PartsImpl({@JsonKey(name: 'text') this.text});
+  _$PartsImpl({this.text});
 
   factory _$PartsImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartsImplFromJson(json);
 
   @override
-  @JsonKey(name: 'text')
-  String? text;
+  final String? text;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -118,6 +114,18 @@ class _$PartsImpl with DiagnosticableTreeMixin implements _Parts {
       ..add(DiagnosticsProperty('type', 'Parts'))
       ..add(DiagnosticsProperty('text', text));
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PartsImpl &&
+            (identical(other.text, text) || other.text == text));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
 
   @JsonKey(ignore: true)
   @override
@@ -134,15 +142,12 @@ class _$PartsImpl with DiagnosticableTreeMixin implements _Parts {
 }
 
 abstract class _Parts implements Parts {
-  factory _Parts({@JsonKey(name: 'text') String? text}) = _$PartsImpl;
+  factory _Parts({final String? text}) = _$PartsImpl;
 
   factory _Parts.fromJson(Map<String, dynamic> json) = _$PartsImpl.fromJson;
 
   @override
-  @JsonKey(name: 'text')
   String? get text;
-  @JsonKey(name: 'text')
-  set text(String? value);
   @override
   @JsonKey(ignore: true)
   _$$PartsImplCopyWith<_$PartsImpl> get copyWith =>

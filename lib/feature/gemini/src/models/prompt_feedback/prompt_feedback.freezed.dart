@@ -12,7 +12,7 @@ part of 'prompt_feedback.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PromptFeedback _$PromptFeedbackFromJson(Map<String, dynamic> json) {
   return _PromptFeedback.fromJson(json);
@@ -20,11 +20,7 @@ PromptFeedback _$PromptFeedbackFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PromptFeedback {
-  @JsonKey(name: 'safetyRatings')
   List<SafetyRatings>? get safetyRatings => throw _privateConstructorUsedError;
-  @JsonKey(name: 'safetyRatings')
-  set safetyRatings(List<SafetyRatings>? value) =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,8 +34,7 @@ abstract class $PromptFeedbackCopyWith<$Res> {
           PromptFeedback value, $Res Function(PromptFeedback) then) =
       _$PromptFeedbackCopyWithImpl<$Res, PromptFeedback>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'safetyRatings') List<SafetyRatings>? safetyRatings});
+  $Res call({List<SafetyRatings>? safetyRatings});
 }
 
 /// @nodoc
@@ -74,8 +69,7 @@ abstract class _$$PromptFeedbackImplCopyWith<$Res>
       __$$PromptFeedbackImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'safetyRatings') List<SafetyRatings>? safetyRatings});
+  $Res call({List<SafetyRatings>? safetyRatings});
 }
 
 /// @nodoc
@@ -93,7 +87,7 @@ class __$$PromptFeedbackImplCopyWithImpl<$Res>
   }) {
     return _then(_$PromptFeedbackImpl(
       safetyRatings: freezed == safetyRatings
-          ? _value.safetyRatings
+          ? _value._safetyRatings
           : safetyRatings // ignore: cast_nullable_to_non_nullable
               as List<SafetyRatings>?,
     ));
@@ -105,14 +99,21 @@ class __$$PromptFeedbackImplCopyWithImpl<$Res>
 class _$PromptFeedbackImpl
     with DiagnosticableTreeMixin
     implements _PromptFeedback {
-  _$PromptFeedbackImpl({@JsonKey(name: 'safetyRatings') this.safetyRatings});
+  _$PromptFeedbackImpl({final List<SafetyRatings>? safetyRatings})
+      : _safetyRatings = safetyRatings;
 
   factory _$PromptFeedbackImpl.fromJson(Map<String, dynamic> json) =>
       _$$PromptFeedbackImplFromJson(json);
 
+  final List<SafetyRatings>? _safetyRatings;
   @override
-  @JsonKey(name: 'safetyRatings')
-  List<SafetyRatings>? safetyRatings;
+  List<SafetyRatings>? get safetyRatings {
+    final value = _safetyRatings;
+    if (value == null) return null;
+    if (_safetyRatings is EqualUnmodifiableListView) return _safetyRatings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -126,6 +127,20 @@ class _$PromptFeedbackImpl
       ..add(DiagnosticsProperty('type', 'PromptFeedback'))
       ..add(DiagnosticsProperty('safetyRatings', safetyRatings));
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PromptFeedbackImpl &&
+            const DeepCollectionEquality()
+                .equals(other._safetyRatings, _safetyRatings));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_safetyRatings));
 
   @JsonKey(ignore: true)
   @override
@@ -143,18 +158,14 @@ class _$PromptFeedbackImpl
 }
 
 abstract class _PromptFeedback implements PromptFeedback {
-  factory _PromptFeedback(
-      {@JsonKey(name: 'safetyRatings')
-      List<SafetyRatings>? safetyRatings}) = _$PromptFeedbackImpl;
+  factory _PromptFeedback({final List<SafetyRatings>? safetyRatings}) =
+      _$PromptFeedbackImpl;
 
   factory _PromptFeedback.fromJson(Map<String, dynamic> json) =
       _$PromptFeedbackImpl.fromJson;
 
   @override
-  @JsonKey(name: 'safetyRatings')
   List<SafetyRatings>? get safetyRatings;
-  @JsonKey(name: 'safetyRatings')
-  set safetyRatings(List<SafetyRatings>? value);
   @override
   @JsonKey(ignore: true)
   _$$PromptFeedbackImplCopyWith<_$PromptFeedbackImpl> get copyWith =>

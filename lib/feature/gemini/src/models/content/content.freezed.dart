@@ -12,7 +12,7 @@ part of 'content.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Content _$ContentFromJson(Map<String, dynamic> json) {
   return _Content.fromJson(json);
@@ -20,14 +20,8 @@ Content _$ContentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Content {
-  @JsonKey(name: 'parts')
   List<Parts>? get parts => throw _privateConstructorUsedError;
-  @JsonKey(name: 'parts')
-  set parts(List<Parts>? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'role')
   String? get role => throw _privateConstructorUsedError;
-  @JsonKey(name: 'role')
-  set role(String? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,9 +33,7 @@ abstract class $ContentCopyWith<$Res> {
   factory $ContentCopyWith(Content value, $Res Function(Content) then) =
       _$ContentCopyWithImpl<$Res, Content>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'parts') List<Parts>? parts,
-      @JsonKey(name: 'role') String? role});
+  $Res call({List<Parts>? parts, String? role});
 }
 
 /// @nodoc
@@ -80,9 +72,7 @@ abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
       __$$ContentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'parts') List<Parts>? parts,
-      @JsonKey(name: 'role') String? role});
+  $Res call({List<Parts>? parts, String? role});
 }
 
 /// @nodoc
@@ -101,7 +91,7 @@ class __$$ContentImplCopyWithImpl<$Res>
   }) {
     return _then(_$ContentImpl(
       parts: freezed == parts
-          ? _value.parts
+          ? _value._parts
           : parts // ignore: cast_nullable_to_non_nullable
               as List<Parts>?,
       role: freezed == role
@@ -115,18 +105,23 @@ class __$$ContentImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ContentImpl with DiagnosticableTreeMixin implements _Content {
-  _$ContentImpl(
-      {@JsonKey(name: 'parts') this.parts, @JsonKey(name: 'role') this.role});
+  _$ContentImpl({final List<Parts>? parts, this.role}) : _parts = parts;
 
   factory _$ContentImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContentImplFromJson(json);
 
+  final List<Parts>? _parts;
   @override
-  @JsonKey(name: 'parts')
-  List<Parts>? parts;
+  List<Parts>? get parts {
+    final value = _parts;
+    if (value == null) return null;
+    if (_parts is EqualUnmodifiableListView) return _parts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
-  @JsonKey(name: 'role')
-  String? role;
+  final String? role;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -141,6 +136,20 @@ class _$ContentImpl with DiagnosticableTreeMixin implements _Content {
       ..add(DiagnosticsProperty('parts', parts))
       ..add(DiagnosticsProperty('role', role));
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ContentImpl &&
+            const DeepCollectionEquality().equals(other._parts, _parts) &&
+            (identical(other.role, role) || other.role == role));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_parts), role);
 
   @JsonKey(ignore: true)
   @override
@@ -157,22 +166,15 @@ class _$ContentImpl with DiagnosticableTreeMixin implements _Content {
 }
 
 abstract class _Content implements Content {
-  factory _Content(
-      {@JsonKey(name: 'parts') List<Parts>? parts,
-      @JsonKey(name: 'role') String? role}) = _$ContentImpl;
+  factory _Content({final List<Parts>? parts, final String? role}) =
+      _$ContentImpl;
 
   factory _Content.fromJson(Map<String, dynamic> json) = _$ContentImpl.fromJson;
 
   @override
-  @JsonKey(name: 'parts')
   List<Parts>? get parts;
-  @JsonKey(name: 'parts')
-  set parts(List<Parts>? value);
   @override
-  @JsonKey(name: 'role')
   String? get role;
-  @JsonKey(name: 'role')
-  set role(String? value);
   @override
   @JsonKey(ignore: true)
   _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>

@@ -17,7 +17,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: AppRoute.chat.path,
-      builder: (context, state) => ChatPage(),
+      builder: (context, state) => const ChatPage(),
     ),
   ],
 );

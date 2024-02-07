@@ -12,7 +12,7 @@ part of 'generation_config.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GenerationConfig _$GenerationConfigFromJson(Map<String, dynamic> json) {
   return _GenerationConfig.fromJson(json);
@@ -20,26 +20,11 @@ GenerationConfig _$GenerationConfigFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GenerationConfig {
-  @JsonKey(name: 'stopSequences')
   List<String>? get stopSequences => throw _privateConstructorUsedError;
-  @JsonKey(name: 'stopSequences')
-  set stopSequences(List<String>? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'temperature')
   double? get temperature => throw _privateConstructorUsedError;
-  @JsonKey(name: 'temperature')
-  set temperature(double? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'maxOutputTokens')
   int? get maxOutputTokens => throw _privateConstructorUsedError;
-  @JsonKey(name: 'maxOutputTokens')
-  set maxOutputTokens(int? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'topP')
   double? get topP => throw _privateConstructorUsedError;
-  @JsonKey(name: 'topP')
-  set topP(double? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'topK')
   int? get topK => throw _privateConstructorUsedError;
-  @JsonKey(name: 'topK')
-  set topK(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,11 +39,11 @@ abstract class $GenerationConfigCopyWith<$Res> {
       _$GenerationConfigCopyWithImpl<$Res, GenerationConfig>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'stopSequences') List<String>? stopSequences,
-      @JsonKey(name: 'temperature') double? temperature,
-      @JsonKey(name: 'maxOutputTokens') int? maxOutputTokens,
-      @JsonKey(name: 'topP') double? topP,
-      @JsonKey(name: 'topK') int? topK});
+      {List<String>? stopSequences,
+      double? temperature,
+      int? maxOutputTokens,
+      double? topP,
+      int? topK});
 }
 
 /// @nodoc
@@ -114,11 +99,11 @@ abstract class _$$GenerationConfigImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'stopSequences') List<String>? stopSequences,
-      @JsonKey(name: 'temperature') double? temperature,
-      @JsonKey(name: 'maxOutputTokens') int? maxOutputTokens,
-      @JsonKey(name: 'topP') double? topP,
-      @JsonKey(name: 'topK') int? topK});
+      {List<String>? stopSequences,
+      double? temperature,
+      int? maxOutputTokens,
+      double? topP,
+      int? topK});
 }
 
 /// @nodoc
@@ -140,7 +125,7 @@ class __$$GenerationConfigImplCopyWithImpl<$Res>
   }) {
     return _then(_$GenerationConfigImpl(
       stopSequences: freezed == stopSequences
-          ? _value.stopSequences
+          ? _value._stopSequences
           : stopSequences // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       temperature: freezed == temperature
@@ -169,30 +154,34 @@ class _$GenerationConfigImpl
     with DiagnosticableTreeMixin
     implements _GenerationConfig {
   _$GenerationConfigImpl(
-      {@JsonKey(name: 'stopSequences') this.stopSequences,
-      @JsonKey(name: 'temperature') this.temperature,
-      @JsonKey(name: 'maxOutputTokens') this.maxOutputTokens,
-      @JsonKey(name: 'topP') this.topP,
-      @JsonKey(name: 'topK') this.topK});
+      {final List<String>? stopSequences,
+      this.temperature,
+      this.maxOutputTokens,
+      this.topP,
+      this.topK})
+      : _stopSequences = stopSequences;
 
   factory _$GenerationConfigImpl.fromJson(Map<String, dynamic> json) =>
       _$$GenerationConfigImplFromJson(json);
 
+  final List<String>? _stopSequences;
   @override
-  @JsonKey(name: 'stopSequences')
-  List<String>? stopSequences;
+  List<String>? get stopSequences {
+    final value = _stopSequences;
+    if (value == null) return null;
+    if (_stopSequences is EqualUnmodifiableListView) return _stopSequences;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
-  @JsonKey(name: 'temperature')
-  double? temperature;
+  final double? temperature;
   @override
-  @JsonKey(name: 'maxOutputTokens')
-  int? maxOutputTokens;
+  final int? maxOutputTokens;
   @override
-  @JsonKey(name: 'topP')
-  double? topP;
+  final double? topP;
   @override
-  @JsonKey(name: 'topK')
-  int? topK;
+  final int? topK;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -211,6 +200,31 @@ class _$GenerationConfigImpl
       ..add(DiagnosticsProperty('topK', topK));
   }
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GenerationConfigImpl &&
+            const DeepCollectionEquality()
+                .equals(other._stopSequences, _stopSequences) &&
+            (identical(other.temperature, temperature) ||
+                other.temperature == temperature) &&
+            (identical(other.maxOutputTokens, maxOutputTokens) ||
+                other.maxOutputTokens == maxOutputTokens) &&
+            (identical(other.topP, topP) || other.topP == topP) &&
+            (identical(other.topK, topK) || other.topK == topK));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_stopSequences),
+      temperature,
+      maxOutputTokens,
+      topP,
+      topK);
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -228,40 +242,25 @@ class _$GenerationConfigImpl
 
 abstract class _GenerationConfig implements GenerationConfig {
   factory _GenerationConfig(
-      {@JsonKey(name: 'stopSequences') List<String>? stopSequences,
-      @JsonKey(name: 'temperature') double? temperature,
-      @JsonKey(name: 'maxOutputTokens') int? maxOutputTokens,
-      @JsonKey(name: 'topP') double? topP,
-      @JsonKey(name: 'topK') int? topK}) = _$GenerationConfigImpl;
+      {final List<String>? stopSequences,
+      final double? temperature,
+      final int? maxOutputTokens,
+      final double? topP,
+      final int? topK}) = _$GenerationConfigImpl;
 
   factory _GenerationConfig.fromJson(Map<String, dynamic> json) =
       _$GenerationConfigImpl.fromJson;
 
   @override
-  @JsonKey(name: 'stopSequences')
   List<String>? get stopSequences;
-  @JsonKey(name: 'stopSequences')
-  set stopSequences(List<String>? value);
   @override
-  @JsonKey(name: 'temperature')
   double? get temperature;
-  @JsonKey(name: 'temperature')
-  set temperature(double? value);
   @override
-  @JsonKey(name: 'maxOutputTokens')
   int? get maxOutputTokens;
-  @JsonKey(name: 'maxOutputTokens')
-  set maxOutputTokens(int? value);
   @override
-  @JsonKey(name: 'topP')
   double? get topP;
-  @JsonKey(name: 'topP')
-  set topP(double? value);
   @override
-  @JsonKey(name: 'topK')
   int? get topK;
-  @JsonKey(name: 'topK')
-  set topK(int? value);
   @override
   @JsonKey(ignore: true)
   _$$GenerationConfigImplCopyWith<_$GenerationConfigImpl> get copyWith =>

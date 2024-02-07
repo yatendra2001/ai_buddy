@@ -12,7 +12,7 @@ part of 'gemini_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GeminiResponse _$GeminiResponseFromJson(Map<String, dynamic> json) {
   return _GeminiResponse.fromJson(json);
@@ -20,15 +20,8 @@ GeminiResponse _$GeminiResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GeminiResponse {
-  @JsonKey(name: 'candidates')
   List<Candidates>? get candidates => throw _privateConstructorUsedError;
-  @JsonKey(name: 'candidates')
-  set candidates(List<Candidates>? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'promptFeedback')
   PromptFeedback? get promptFeedback => throw _privateConstructorUsedError;
-  @JsonKey(name: 'promptFeedback')
-  set promptFeedback(PromptFeedback? value) =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,9 +35,7 @@ abstract class $GeminiResponseCopyWith<$Res> {
           GeminiResponse value, $Res Function(GeminiResponse) then) =
       _$GeminiResponseCopyWithImpl<$Res, GeminiResponse>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'candidates') List<Candidates>? candidates,
-      @JsonKey(name: 'promptFeedback') PromptFeedback? promptFeedback});
+  $Res call({List<Candidates>? candidates, PromptFeedback? promptFeedback});
 
   $PromptFeedbackCopyWith<$Res>? get promptFeedback;
 }
@@ -98,9 +89,7 @@ abstract class _$$GeminiResponseImplCopyWith<$Res>
       __$$GeminiResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'candidates') List<Candidates>? candidates,
-      @JsonKey(name: 'promptFeedback') PromptFeedback? promptFeedback});
+  $Res call({List<Candidates>? candidates, PromptFeedback? promptFeedback});
 
   @override
   $PromptFeedbackCopyWith<$Res>? get promptFeedback;
@@ -122,7 +111,7 @@ class __$$GeminiResponseImplCopyWithImpl<$Res>
   }) {
     return _then(_$GeminiResponseImpl(
       candidates: freezed == candidates
-          ? _value.candidates
+          ? _value._candidates
           : candidates // ignore: cast_nullable_to_non_nullable
               as List<Candidates>?,
       promptFeedback: freezed == promptFeedback
@@ -139,18 +128,24 @@ class _$GeminiResponseImpl
     with DiagnosticableTreeMixin
     implements _GeminiResponse {
   _$GeminiResponseImpl(
-      {@JsonKey(name: 'candidates') this.candidates,
-      @JsonKey(name: 'promptFeedback') this.promptFeedback});
+      {final List<Candidates>? candidates, this.promptFeedback})
+      : _candidates = candidates;
 
   factory _$GeminiResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$GeminiResponseImplFromJson(json);
 
+  final List<Candidates>? _candidates;
   @override
-  @JsonKey(name: 'candidates')
-  List<Candidates>? candidates;
+  List<Candidates>? get candidates {
+    final value = _candidates;
+    if (value == null) return null;
+    if (_candidates is EqualUnmodifiableListView) return _candidates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
-  @JsonKey(name: 'promptFeedback')
-  PromptFeedback? promptFeedback;
+  final PromptFeedback? promptFeedback;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -165,6 +160,22 @@ class _$GeminiResponseImpl
       ..add(DiagnosticsProperty('candidates', candidates))
       ..add(DiagnosticsProperty('promptFeedback', promptFeedback));
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GeminiResponseImpl &&
+            const DeepCollectionEquality()
+                .equals(other._candidates, _candidates) &&
+            (identical(other.promptFeedback, promptFeedback) ||
+                other.promptFeedback == promptFeedback));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_candidates), promptFeedback);
 
   @JsonKey(ignore: true)
   @override
@@ -183,23 +194,16 @@ class _$GeminiResponseImpl
 
 abstract class _GeminiResponse implements GeminiResponse {
   factory _GeminiResponse(
-          {@JsonKey(name: 'candidates') List<Candidates>? candidates,
-          @JsonKey(name: 'promptFeedback') PromptFeedback? promptFeedback}) =
-      _$GeminiResponseImpl;
+      {final List<Candidates>? candidates,
+      final PromptFeedback? promptFeedback}) = _$GeminiResponseImpl;
 
   factory _GeminiResponse.fromJson(Map<String, dynamic> json) =
       _$GeminiResponseImpl.fromJson;
 
   @override
-  @JsonKey(name: 'candidates')
   List<Candidates>? get candidates;
-  @JsonKey(name: 'candidates')
-  set candidates(List<Candidates>? value);
   @override
-  @JsonKey(name: 'promptFeedback')
   PromptFeedback? get promptFeedback;
-  @JsonKey(name: 'promptFeedback')
-  set promptFeedback(PromptFeedback? value);
   @override
   @JsonKey(ignore: true)
   _$$GeminiResponseImplCopyWith<_$GeminiResponseImpl> get copyWith =>

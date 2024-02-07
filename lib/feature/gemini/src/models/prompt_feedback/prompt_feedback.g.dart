@@ -14,7 +14,7 @@ _$PromptFeedbackImpl _$$PromptFeedbackImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$PromptFeedbackImplToJson(
-        _$PromptFeedbackImpl instance,) =>
+        _$PromptFeedbackImpl instance) =>
     <String, dynamic>{
       'safetyRatings': instance.safetyRatings,
     };

@@ -12,7 +12,7 @@ part of 'candidates.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Candidates _$CandidatesFromJson(Map<String, dynamic> json) {
   return _Candidates.fromJson(json);
@@ -20,23 +20,10 @@ Candidates _$CandidatesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Candidates {
-  @JsonKey(name: 'content')
   Content? get content => throw _privateConstructorUsedError;
-  @JsonKey(name: 'content')
-  set content(Content? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'finishReason')
   String? get finishReason => throw _privateConstructorUsedError;
-  @JsonKey(name: 'finishReason')
-  set finishReason(String? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'index')
   int? get index => throw _privateConstructorUsedError;
-  @JsonKey(name: 'index')
-  set index(int? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'safetyRatings')
   List<SafetyRatings>? get safetyRatings => throw _privateConstructorUsedError;
-  @JsonKey(name: 'safetyRatings')
-  set safetyRatings(List<SafetyRatings>? value) =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,10 +38,10 @@ abstract class $CandidatesCopyWith<$Res> {
       _$CandidatesCopyWithImpl<$Res, Candidates>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'content') Content? content,
-      @JsonKey(name: 'finishReason') String? finishReason,
-      @JsonKey(name: 'index') int? index,
-      @JsonKey(name: 'safetyRatings') List<SafetyRatings>? safetyRatings});
+      {Content? content,
+      String? finishReason,
+      int? index,
+      List<SafetyRatings>? safetyRatings});
 
   $ContentCopyWith<$Res>? get content;
 }
@@ -119,10 +106,10 @@ abstract class _$$CandidatesImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'content') Content? content,
-      @JsonKey(name: 'finishReason') String? finishReason,
-      @JsonKey(name: 'index') int? index,
-      @JsonKey(name: 'safetyRatings') List<SafetyRatings>? safetyRatings});
+      {Content? content,
+      String? finishReason,
+      int? index,
+      List<SafetyRatings>? safetyRatings});
 
   @override
   $ContentCopyWith<$Res>? get content;
@@ -158,7 +145,7 @@ class __$$CandidatesImplCopyWithImpl<$Res>
           : index // ignore: cast_nullable_to_non_nullable
               as int?,
       safetyRatings: freezed == safetyRatings
-          ? _value.safetyRatings
+          ? _value._safetyRatings
           : safetyRatings // ignore: cast_nullable_to_non_nullable
               as List<SafetyRatings>?,
     ));
@@ -169,26 +156,30 @@ class __$$CandidatesImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
   _$CandidatesImpl(
-      {@JsonKey(name: 'content') this.content,
-      @JsonKey(name: 'finishReason') this.finishReason,
-      @JsonKey(name: 'index') this.index,
-      @JsonKey(name: 'safetyRatings') this.safetyRatings});
+      {this.content,
+      this.finishReason,
+      this.index,
+      final List<SafetyRatings>? safetyRatings})
+      : _safetyRatings = safetyRatings;
 
   factory _$CandidatesImpl.fromJson(Map<String, dynamic> json) =>
       _$$CandidatesImplFromJson(json);
 
   @override
-  @JsonKey(name: 'content')
-  Content? content;
+  final Content? content;
   @override
-  @JsonKey(name: 'finishReason')
-  String? finishReason;
+  final String? finishReason;
   @override
-  @JsonKey(name: 'index')
-  int? index;
+  final int? index;
+  final List<SafetyRatings>? _safetyRatings;
   @override
-  @JsonKey(name: 'safetyRatings')
-  List<SafetyRatings>? safetyRatings;
+  List<SafetyRatings>? get safetyRatings {
+    final value = _safetyRatings;
+    if (value == null) return null;
+    if (_safetyRatings is EqualUnmodifiableListView) return _safetyRatings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -206,6 +197,24 @@ class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
       ..add(DiagnosticsProperty('safetyRatings', safetyRatings));
   }
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CandidatesImpl &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.finishReason, finishReason) ||
+                other.finishReason == finishReason) &&
+            (identical(other.index, index) || other.index == index) &&
+            const DeepCollectionEquality()
+                .equals(other._safetyRatings, _safetyRatings));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, content, finishReason, index,
+      const DeepCollectionEquality().hash(_safetyRatings));
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -222,35 +231,22 @@ class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
 
 abstract class _Candidates implements Candidates {
   factory _Candidates(
-          {@JsonKey(name: 'content') Content? content,
-          @JsonKey(name: 'finishReason') String? finishReason,
-          @JsonKey(name: 'index') int? index,
-          @JsonKey(name: 'safetyRatings') List<SafetyRatings>? safetyRatings}) =
-      _$CandidatesImpl;
+      {final Content? content,
+      final String? finishReason,
+      final int? index,
+      final List<SafetyRatings>? safetyRatings}) = _$CandidatesImpl;
 
   factory _Candidates.fromJson(Map<String, dynamic> json) =
       _$CandidatesImpl.fromJson;
 
   @override
-  @JsonKey(name: 'content')
   Content? get content;
-  @JsonKey(name: 'content')
-  set content(Content? value);
   @override
-  @JsonKey(name: 'finishReason')
   String? get finishReason;
-  @JsonKey(name: 'finishReason')
-  set finishReason(String? value);
   @override
-  @JsonKey(name: 'index')
   int? get index;
-  @JsonKey(name: 'index')
-  set index(int? value);
   @override
-  @JsonKey(name: 'safetyRatings')
   List<SafetyRatings>? get safetyRatings;
-  @JsonKey(name: 'safetyRatings')
-  set safetyRatings(List<SafetyRatings>? value);
   @override
   @JsonKey(ignore: true)
   _$$CandidatesImplCopyWith<_$CandidatesImpl> get copyWith =>

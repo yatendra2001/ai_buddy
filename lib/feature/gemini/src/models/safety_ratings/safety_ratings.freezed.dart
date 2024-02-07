@@ -12,7 +12,7 @@ part of 'safety_ratings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SafetyRatings _$SafetyRatingsFromJson(Map<String, dynamic> json) {
   return _SafetyRatings.fromJson(json);
@@ -20,14 +20,8 @@ SafetyRatings _$SafetyRatingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SafetyRatings {
-  @JsonKey(name: 'category')
   String? get category => throw _privateConstructorUsedError;
-  @JsonKey(name: 'category')
-  set category(String? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'probability')
   String? get probability => throw _privateConstructorUsedError;
-  @JsonKey(name: 'probability')
-  set probability(String? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +35,7 @@ abstract class $SafetyRatingsCopyWith<$Res> {
           SafetyRatings value, $Res Function(SafetyRatings) then) =
       _$SafetyRatingsCopyWithImpl<$Res, SafetyRatings>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'category') String? category,
-      @JsonKey(name: 'probability') String? probability});
+  $Res call({String? category, String? probability});
 }
 
 /// @nodoc
@@ -83,9 +75,7 @@ abstract class _$$SafetyRatingsImplCopyWith<$Res>
       __$$SafetyRatingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'category') String? category,
-      @JsonKey(name: 'probability') String? probability});
+  $Res call({String? category, String? probability});
 }
 
 /// @nodoc
@@ -120,19 +110,15 @@ class __$$SafetyRatingsImplCopyWithImpl<$Res>
 class _$SafetyRatingsImpl
     with DiagnosticableTreeMixin
     implements _SafetyRatings {
-  _$SafetyRatingsImpl(
-      {@JsonKey(name: 'category') this.category,
-      @JsonKey(name: 'probability') this.probability});
+  _$SafetyRatingsImpl({this.category, this.probability});
 
   factory _$SafetyRatingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SafetyRatingsImplFromJson(json);
 
   @override
-  @JsonKey(name: 'category')
-  String? category;
+  final String? category;
   @override
-  @JsonKey(name: 'probability')
-  String? probability;
+  final String? probability;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -147,6 +133,21 @@ class _$SafetyRatingsImpl
       ..add(DiagnosticsProperty('category', category))
       ..add(DiagnosticsProperty('probability', probability));
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SafetyRatingsImpl &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.probability, probability) ||
+                other.probability == probability));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, category, probability);
 
   @JsonKey(ignore: true)
   @override
@@ -163,23 +164,16 @@ class _$SafetyRatingsImpl
 }
 
 abstract class _SafetyRatings implements SafetyRatings {
-  factory _SafetyRatings(
-      {@JsonKey(name: 'category') String? category,
-      @JsonKey(name: 'probability') String? probability}) = _$SafetyRatingsImpl;
+  factory _SafetyRatings({final String? category, final String? probability}) =
+      _$SafetyRatingsImpl;
 
   factory _SafetyRatings.fromJson(Map<String, dynamic> json) =
       _$SafetyRatingsImpl.fromJson;
 
   @override
-  @JsonKey(name: 'category')
   String? get category;
-  @JsonKey(name: 'category')
-  set category(String? value);
   @override
-  @JsonKey(name: 'probability')
   String? get probability;
-  @JsonKey(name: 'probability')
-  set probability(String? value);
   @override
   @JsonKey(ignore: true)
   _$$SafetyRatingsImplCopyWith<_$SafetyRatingsImpl> get copyWith =>

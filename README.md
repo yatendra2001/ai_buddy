@@ -1,19 +1,19 @@
-# Scalable Flutter App Starter
+# AI Buddy App Starter
 
-👋 Hey, welcome to Scalable Flutter App.
+👋 Hey, welcome to AI Buddy App.
 
 Watch/star this repo to be notified when updates are pushed.
 
 ## Table of Contents
 
 <!-- TOC -->
-* [Scalable Flutter App Starter](#scalable-flutter-app-starter)
+* [AI Buddy App Starter](#scalable-flutter-app-starter)
   * [Table of Contents](#table-of-contents)
-  * [What is Scalable Flutter App?](#what-is-scalable-flutter-app)
+  * [What is AI Buddy App?](#what-is-scalable-flutter-app)
   * [Requirements](#requirements)
   * [About the Author](#about-the-author)
 * [Features](#features)
-  * [Scalable Flutter App Pro](#scalable-flutter-app-pro)
+  * [AI Buddy App Pro](#scalable-flutter-app-pro)
 * [Docs](#docs)
   * [Code Architecture](#code-architecture)
   * [Styling](#styling)
@@ -21,7 +21,7 @@ Watch/star this repo to be notified when updates are pushed.
   * [Useful GitHub Pull Request Settings](#useful-github-pull-request-settings)
 * [FAQ](#faq)
   * [Why bloc and not X?](#why-bloc-and-not-x)
-  * [Who is Scalable Flutter App for?](#who-is-scalable-flutter-app-for)
+  * [Who is AI Buddy App for?](#who-is-scalable-flutter-app-for)
   * [Where to learn Flutter basics?](#where-to-learn-flutter-basics)
   * [What if I don't need a specific feature?](#what-if-i-dont-need-a-specific-feature)
   * [What if I want more?](#what-if-i-want-more)
@@ -29,9 +29,9 @@ Watch/star this repo to be notified when updates are pushed.
 * [Feedback](#feedback)
 <!-- TOC -->
 
-## What is Scalable Flutter App?
+## What is AI Buddy App?
 
-Scalable Flutter App is a starter template for Flutter apps.
+AI Buddy App is a starter template for Flutter apps.
 
 It's designed to be scalable and easy to maintain. And should save you weeks of development time.
 
@@ -109,9 +109,9 @@ You can find me on:
 | Forgot Password                                                      | ❌       | ✅   |
 | 🎉 BONUS: Scalable Firebase Backend Template                         | ❌       | ✅   |
 
-## Scalable Flutter App Pro
+## AI Buddy App Pro
 
-[Grab Scalable Flutter App - Pro Here](https://AIBuddy.com/)
+[Grab AI Buddy App - Pro Here](https://AIBuddy.com/)
 
 # Docs
 
@@ -196,11 +196,11 @@ in order to access and change the state. The stricter the rules, the harder it i
 And flutter_bloc has a great [architecture proposal](https://bloclibrary.dev/#/architecture) that
 scales well.
 
-## Who is Scalable Flutter App for?
+## Who is AI Buddy App for?
 
-Scalable Flutter App is for developers, agencies, and founders who want to:
+AI Buddy App is for developers, agencies, and founders who want to:
 
-- build scalable Flutter apps
+- build AI Buddy apps
 - save weeks of development time
 - learn best practices
 
@@ -246,4 +246,4 @@ an [issue](https://github.com/Gradoid/ai_buddy/issues)
 Have a question? Ask me on [LinkedIn](https://www.linkedin.com/in/milos-jokic/)
 or [Twitter](https://twitter.com/miloshjokic).
 
-Enjoying Scalable Flutter App? [Leave a testimonial](https://testimonial.to/scalable-flutter-app)
+Enjoying AI Buddy App? [Leave a testimonial](https://testimonial.to/scalable-flutter-app)

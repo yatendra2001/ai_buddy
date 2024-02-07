@@ -1,5 +1,5 @@
 name: ai_buddy
-description: A scalable Flutter app.
+description: A AI Buddy app.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -42,6 +42,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.4.8
   freezed: ^2.4.7
+  hive_generator: ^2.0.0
   json_serializable: ^6.7.1
   mockito: ^5.4.4
 

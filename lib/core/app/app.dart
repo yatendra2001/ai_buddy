@@ -10,7 +10,7 @@ class AIBuddy extends StatelessWidget {
   Widget build(BuildContext context) {
     return DI(
       child: MaterialApp.router(
-        title: 'Scalable Flutter App Starter',
+        title: 'AI Buddy App Starter',
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
         routerConfig: router,
