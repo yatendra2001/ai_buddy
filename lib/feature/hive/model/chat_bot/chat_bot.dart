@@ -1,10 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:hive/hive.dart';
 
 part 'chat_bot.g.dart';
 
 @HiveType(typeId: 0)
 class ChatBot extends HiveObject {
+  ChatBot({
+    required this.messagesList,
+    required this.id,
+    required this.title,
+    required this.typeOfBot,
+    this.attachmentPath,
+  });
   @HiveField(0)
   final String id;
 
@@ -17,10 +23,6 @@ class ChatBot extends HiveObject {
   @HiveField(3)
   final String typeOfBot;
 
-  ChatBot({
-    required this.id,
-    required this.title,
-    required this.typeOfBot,
-    this.attachmentPath,
-  });
+  @HiveField(4)
+  final List<Map<String, dynamic>> messagesList;
 }

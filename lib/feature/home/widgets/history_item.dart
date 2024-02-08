@@ -1,17 +1,26 @@
 import 'package:ai_buddy/core/navigation/route.dart';
+import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
+import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
 import 'package:flutter/material.dart';
 
-class HistoryItem extends StatelessWidget {
+class HistoryItem extends StatefulWidget {
   const HistoryItem({
     required this.label,
     required this.icondata,
     required this.color,
+    required this.chatbot,
     super.key,
   });
   final String label;
   final IconData icondata;
   final Color color;
+  final ChatBot chatbot;
 
+  @override
+  State<HistoryItem> createState() => _HistoryItemState();
+}
+
+class _HistoryItemState extends State<HistoryItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,10 +44,10 @@ class HistoryItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CircleAvatar(
-              backgroundColor: color,
+              backgroundColor: widget.color,
               radius: 21,
               child: Icon(
-                icondata,
+                widget.icondata,
                 size: 20,
                 color: Theme.of(context).colorScheme.background,
               ),
@@ -46,7 +55,7 @@ class HistoryItem extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                label,
+                widget.label,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -55,7 +64,15 @@ class HistoryItem extends StatelessWidget {
                     ),
               ),
             ),
-            const Icon(Icons.more_vert),
+            IconButton(
+              icon: const Icon(Icons.delete),
+              style: IconButton.styleFrom(
+                padding: null,
+              ),
+              onPressed: () async {
+                await HiveRepository().deleteChatBot(chatBot: widget.chatbot);
+              },
+            ),
           ],
         ),
       ),

@@ -1,28 +1,21 @@
-import 'package:hive/hive.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'chat_message.freezed.dart';
 part 'chat_message.g.dart';
 
-@HiveType(typeId: 1)
-class ChatMessage extends HiveObject {
-  ChatMessage({
-    required this.id,
-    required this.text,
-    required this.createdAt,
-    required this.senderId,
-    required this.chatBotId,
-  });
-  @HiveField(0)
-  final String id;
+@freezed
+class ChatMessage with _$ChatMessage {
+  const factory ChatMessage({
+    required String id,
+    required String text,
+    required DateTime createdAt,
+    required String typeOfMessage,
+    required String chatBotId,
+  }) = _ChatMessage;
 
-  @HiveField(1)
-  final String text;
+  factory ChatMessage.fromJson(Map<String, dynamic> json) =>
+      _$ChatMessageFromJson(json);
 
-  @HiveField(2)
-  final DateTime createdAt;
-
-  @HiveField(3)
-  final String senderId;
-
-  @HiveField(4)
-  final String chatBotId;
+  static List<ChatMessage> jsonToList(List<dynamic> list) =>
+      list.map((e) => ChatMessage.fromJson(e as Map<String, dynamic>)).toList();
 }

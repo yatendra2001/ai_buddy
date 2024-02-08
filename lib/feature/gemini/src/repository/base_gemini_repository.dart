@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:ai_buddy/feature/gemini/flutter_gemini.dart';
+import 'package:ai_buddy/feature/gemini/gemini.dart';
 import 'package:ai_buddy/feature/gemini/src/models/candidates/candidates.dart';
 
 abstract class BaseGeminiRepository {

@@ -7,19 +7,19 @@ class CardButton extends StatelessWidget {
     required this.icondata,
     required this.color,
     required this.isMainButton,
+    required this.onPressed,
     super.key,
   });
   final String title;
   final IconData icondata;
   final Color color;
   final bool isMainButton;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // TODO: Implement navigation to chat feature
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(16),
         backgroundColor: color,

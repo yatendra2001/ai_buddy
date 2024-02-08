@@ -17,6 +17,9 @@ class ChatBotAdapter extends TypeAdapter<ChatBot> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ChatBot(
+      messagesList: (fields[4] as List)
+          .map((dynamic e) => (e as Map).cast<String, dynamic>())
+          .toList(),
       id: fields[0] as String,
       title: fields[2] as String,
       typeOfBot: fields[3] as String,
@@ -27,7 +30,7 @@ class ChatBotAdapter extends TypeAdapter<ChatBot> {
   @override
   void write(BinaryWriter writer, ChatBot obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +38,9 @@ class ChatBotAdapter extends TypeAdapter<ChatBot> {
       ..writeByte(2)
       ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.typeOfBot);
+      ..write(obj.typeOfBot)
+      ..writeByte(4)
+      ..write(obj.messagesList);
   }
 
   @override

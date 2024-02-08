@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:ai_buddy/feature/gemini/flutter_gemini.dart';
+import 'package:ai_buddy/feature/gemini/gemini.dart';
 import 'package:ai_buddy/feature/gemini/src/config/constants.dart';
 import 'package:ai_buddy/feature/gemini/src/models/candidates/candidates.dart';
 import 'package:ai_buddy/feature/gemini/src/repository/base_gemini_repository.dart';
 import 'package:ai_buddy/feature/gemini/src/repository/network_service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class GeminiRepository implements BaseGeminiRepository {
   GeminiRepository({
@@ -222,7 +223,7 @@ class GeminiRepository implements BaseGeminiRepository {
         try {
           res = utf8.decode(list);
         } catch (e) {
-          print('error: $e');
+          debugPrint('error: $e');
           cacheUnits = list;
           continue;
         }

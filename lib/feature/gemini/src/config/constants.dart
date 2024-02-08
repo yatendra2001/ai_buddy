@@ -74,8 +74,10 @@ class Constants {
           'name': 'models/gemini-pro-vision',
           'version': '001',
           'displayName': 'Gemini Pro Vision',
-          'description':
-              'The best image understanding model to handle a broad range of applications',
+          'description': '''
+              The best image understanding model to handle a broad range of
+              applications
+              ''',
           'inputTokenLimit': 12288,
           'outputTokenLimit': 4096,
           'supportedGenerationMethods': ['generateContent', 'countTokens'],
@@ -108,8 +110,10 @@ class Constants {
           'name': 'models/aqa',
           'version': '001',
           'displayName': 'Model that performs Attributed Question Answering.',
-          'description':
-              'Model trained to return answers to questions that are grounded in provided sources, along with estimating answerable probability.',
+          'description': '''
+              Model trained to return answers to questions that are grounded in 
+              provided sources, along with estimating answerable probability.
+              ''',
           'inputTokenLimit': 7168,
           'outputTokenLimit': 1024,
           'supportedGenerationMethods': ['generateAnswer'],
