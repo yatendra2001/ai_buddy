@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class GeminiResponseProvider extends ChangeNotifier {
-
   GeminiResponseProvider() {
     Timer.periodic(const Duration(milliseconds: 2), (timer) {
       if (response == null || lastTypeResponseOrNull == response) {
@@ -46,7 +45,7 @@ class GeminiResponseProvider extends ChangeNotifier {
     if (response == null) {
       response = text;
     } else {
-      response = "${response!}$text";
+      response = '${response!}$text';
     }
   }
 }

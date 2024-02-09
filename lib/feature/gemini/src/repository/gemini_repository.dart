@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars, use_string_buffers
+
 import 'dart:convert';
 import 'dart:typed_data';
 

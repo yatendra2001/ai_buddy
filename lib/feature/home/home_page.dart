@@ -165,6 +165,7 @@ class _HomePageState extends State<HomePage> {
                                 await HiveRepository().saveChatBot(
                                   chatBot: chatBot!,
                                 );
+                                // ignore: use_build_context_synchronously
                                 AppRoute.chat.push(context);
                               },
                             ),
