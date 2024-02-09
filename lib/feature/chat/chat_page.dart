@@ -1,30 +1,43 @@
-import 'package:ai_buddy/core/logger/logger.dart';
-import 'package:ai_buddy/feature/gemini/src/init.dart';
-import 'package:ai_buddy/feature/gemini/src/models/content/content.dart';
-import 'package:ai_buddy/feature/gemini/src/models/parts/parts.dart';
+import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
+import 'package:ai_buddy/feature/hive/config/type_of_bot.dart';
 import 'package:ai_buddy/feature/hive/config/type_of_message.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:uuid/uuid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ChatPage extends StatefulWidget {
+class ChatPage extends ConsumerWidget {
   const ChatPage({super.key});
-  @override
-  State<ChatPage> createState() => _ChatPageState();
-}
-
-class _ChatPageState extends State<ChatPage> {
-  final gemini = Gemini.init(apiKey: 'AIzaSyAa6TGCb-8tlgXve9SUkzUOCukWM2rdczg');
-  final uuid = const Uuid();
-  List<types.Message> messages = [];
 
   @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.secondary;
-    const iconData = Linecons.comment;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final chatBot = ref.watch(messageListProvider);
+    final color = chatBot.typeOfBot == TypeOfBot.pdf
+        ? Theme.of(context).colorScheme.primary
+        : chatBot.typeOfBot == TypeOfBot.text
+            ? Theme.of(context).colorScheme.secondary
+            : Theme.of(context).colorScheme.tertiary;
+    final iconData = chatBot.typeOfBot == TypeOfBot.pdf
+        ? Entypo.book_open
+        : chatBot.typeOfBot == TypeOfBot.image
+            ? FontAwesomeIcons.images
+            : Linecons.comment;
+
+    final List<types.Message> messages = chatBot.messagesList.map((msg) {
+      return types.TextMessage(
+        author: types.User(id: msg['typeOfMessage'] as String),
+        createdAt:
+            DateTime.parse(msg['createdAt'] as String).millisecondsSinceEpoch,
+        id: msg['id'] as String,
+        text: msg['text'] as String,
+      );
+    }).toList()
+      ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -101,7 +114,9 @@ class _ChatPageState extends State<ChatPage> {
                   Expanded(
                     child: Chat(
                       messages: messages,
-                      onSendPressed: _handleSendPressed,
+                      onSendPressed: (text) => ref
+                          .watch(messageListProvider.notifier)
+                          .handleSendPressed(text.text),
                       user: const types.User(id: TypeOfMessage.user),
                       showUserAvatars: true,
                       avatarBuilder: (user) => Padding(
@@ -173,71 +188,5 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ),
     );
-  }
-
-  Future<void> _handleSendPressed(types.PartialText text) async {
-    final messageId = uuid.v4();
-    // Add to repository
-    final textMessage = types.TextMessage(
-      author: const types.User(id: TypeOfMessage.user),
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: messageId,
-      text: text.text,
-    );
-    setState(() {
-      messages.insert(0, textMessage);
-    });
-    await _streamGeminiResponse(text.text);
-  }
-
-  Future<void> _streamGeminiResponse(String query) async {
-    final List<Parts> chatParts = messages.map((msg) {
-      if (msg is types.TextMessage) {
-        return Parts(text: msg.text);
-      } else {
-        return Parts(text: '');
-      }
-    }).toList()
-      ..add(Parts(text: query));
-
-    final content = Content(parts: chatParts);
-    final responseStream = gemini.streamChat([content]);
-
-    final String modelMessageId = uuid.v4();
-    final placeholderMessage = types.TextMessage(
-      author: const types.User(id: TypeOfMessage.bot),
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: modelMessageId,
-      text: 'waiting for response...',
-    );
-
-    setState(() {
-      messages.insert(0, placeholderMessage);
-    });
-
-    final StringBuffer fullResponseText = StringBuffer();
-
-    responseStream.listen((response) {
-      if (response.content!.parts!.isNotEmpty) {
-        fullResponseText.write(response.content!.parts!.first.text);
-        final int messageIndex =
-            messages.indexWhere((msg) => msg.id == modelMessageId);
-        if (messageIndex != -1) {
-          final updatedMessage = types.TextMessage(
-            author: messages[messageIndex].author,
-            createdAt: messages[messageIndex].createdAt,
-            id: messages[messageIndex].id,
-            text: fullResponseText.toString(),
-          );
-
-          setState(() {
-            messages[messageIndex] = updatedMessage;
-          });
-        }
-      }
-      // ignore: inference_failure_on_untyped_parameter
-    }).onError((error) {
-      logError('Error in response stream $error');
-    });
   }
 }

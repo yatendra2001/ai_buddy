@@ -1,53 +1,51 @@
 import 'package:ai_buddy/core/navigation/route.dart';
+import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
-import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
+import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HistoryItem extends StatefulWidget {
+class HistoryItem extends ConsumerWidget {
   const HistoryItem({
     required this.label,
-    required this.icondata,
+    required this.iconData,
     required this.color,
-    required this.chatbot,
+    required this.chatBot,
     super.key,
   });
   final String label;
-  final IconData icondata;
+  final IconData iconData;
   final Color color;
-  final ChatBot chatbot;
+  final ChatBot chatBot;
 
   @override
-  State<HistoryItem> createState() => _HistoryItemState();
-}
-
-class _HistoryItemState extends State<HistoryItem> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: ElevatedButton(
         onPressed: () {
+          ref.read(messageListProvider.notifier).updateChatBot(chatBot);
           AppRoute.chat.push(context);
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.onBackground,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.outline,
-              width: 0.5,
+            backgroundColor: Theme.of(context).colorScheme.onBackground,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outline,
+                width: 0.5,
+              ),
             ),
-          ),
-        ),
+            padding: EdgeInsets.all(8)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CircleAvatar(
-              backgroundColor: widget.color,
+              backgroundColor: color,
               radius: 21,
               child: Icon(
-                widget.icondata,
+                iconData,
                 size: 20,
                 color: Theme.of(context).colorScheme.background,
               ),
@@ -55,7 +53,7 @@ class _HistoryItemState extends State<HistoryItem> {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                widget.label,
+                label,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -66,11 +64,8 @@ class _HistoryItemState extends State<HistoryItem> {
             ),
             IconButton(
               icon: const Icon(Icons.delete),
-              style: IconButton.styleFrom(
-                padding: null,
-              ),
-              onPressed: () async {
-                await HiveRepository().deleteChatBot(chatBot: widget.chatbot);
+              onPressed: () {
+                ref.read(chatBotListProvider.notifier).deleteChatBot(chatBot);
               },
             ),
           ],

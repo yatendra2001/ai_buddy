@@ -1,59 +1,75 @@
-import 'package:ai_buddy/core/logger/logger.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
+import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/hive/config/type_of_bot.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
-import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
+import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  List<ChatBot> chatBotsList = [];
-  ChatBot? chatBot;
+class _HomePageState extends ConsumerState<HomePage> {
+  final uuid = const Uuid();
+  late final String uniqueGeneratedId;
+
   @override
   void initState() {
     super.initState();
-    _getChatBots();
+    ref.read(chatBotListProvider.notifier).fetchChatBots();
+    uniqueGeneratedId = uuid.v4();
   }
-
-  Future<void> _getChatBots() async {
-    final chatBotsList = await HiveRepository().getChatBots();
-    logInfo('ChatBots List: $chatBotsList');
-  }
-
-  final uuid = const Uuid();
 
   void _showAllHistory(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (context) {
-        return ListView.builder(
-          itemCount: chatBotsList.length,
-          itemBuilder: (context, index) {
-            final chatBot = chatBotsList[index];
-            return HistoryItem(
-              icondata: chatBot.typeOfBot == TypeOfBot.pdf
-                  ? Entypo.book_open
-                  : chatBot.typeOfBot == TypeOfBot.image
-                      ? FontAwesomeIcons.images
-                      : Linecons.comment,
-              label: chatBot.title,
-              color: chatBot.typeOfBot == TypeOfBot.pdf
-                  ? Theme.of(context).colorScheme.primary
-                  : chatBot.typeOfBot == TypeOfBot.image
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.tertiary,
-              chatbot: chatBot,
+        return Consumer(
+          builder: (context, ref, child) {
+            final chatBotsList = ref.watch(chatBotListProvider);
+            return Column(
+              children: [
+                Container(
+                  height: 4,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: chatBotsList.length,
+                    itemBuilder: (context, index) {
+                      final chatBot = chatBotsList[index];
+                      return HistoryItem(
+                        iconData: chatBot.typeOfBot == TypeOfBot.pdf
+                            ? Entypo.book_open
+                            : chatBot.typeOfBot == TypeOfBot.image
+                                ? FontAwesomeIcons.images
+                                : Linecons.comment,
+                        label: chatBot.title,
+                        color: chatBot.typeOfBot == TypeOfBot.pdf
+                            ? Theme.of(context).colorScheme.primary
+                            : chatBot.typeOfBot == TypeOfBot.text
+                                ? Theme.of(context).colorScheme.secondary
+                                : Theme.of(context).colorScheme.tertiary,
+                        chatBot: chatBot,
+                      );
+                    },
+                  ),
+                ),
+              ],
             );
           },
         );
@@ -63,6 +79,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final chatBotsList = ref.watch(chatBotListProvider);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -153,18 +170,19 @@ class _HomePageState extends State<HomePage> {
                               color: Theme.of(context).colorScheme.secondary,
                               icondata: Linecons.comment,
                               isMainButton: false,
-                              onPressed: () async {
-                                setState(() {
-                                  chatBot = ChatBot(
-                                    messagesList: [],
-                                    id: uuid.v4(),
-                                    title: 'Placeholder title',
-                                    typeOfBot: TypeOfBot.text,
-                                  );
-                                });
-                                await HiveRepository().saveChatBot(
-                                  chatBot: chatBot!,
+                              onPressed: () {
+                                final chatBot = ChatBot(
+                                  messagesList: [],
+                                  id: uniqueGeneratedId,
+                                  title: 'Placeholder title',
+                                  typeOfBot: TypeOfBot.text,
                                 );
+                                ref
+                                    .read(chatBotListProvider.notifier)
+                                    .saveChatBot(chatBot);
+                                ref
+                                    .read(messageListProvider.notifier)
+                                    .updateChatBot(chatBot);
                                 // ignore: use_build_context_synchronously
                                 AppRoute.chat.push(context);
                               },
@@ -266,17 +284,17 @@ class _HomePageState extends State<HomePage> {
                             final chatBot = chatBotsList[index];
                             return HistoryItem(
                               label: chatBot.title,
-                              icondata: chatBot.typeOfBot == TypeOfBot.pdf
+                              iconData: chatBot.typeOfBot == TypeOfBot.pdf
                                   ? Entypo.book_open
                                   : chatBot.typeOfBot == TypeOfBot.image
                                       ? FontAwesomeIcons.images
                                       : Linecons.comment,
                               color: chatBot.typeOfBot == TypeOfBot.pdf
                                   ? Theme.of(context).colorScheme.primary
-                                  : chatBot.typeOfBot == TypeOfBot.image
+                                  : chatBot.typeOfBot == TypeOfBot.text
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.tertiary,
-                              chatbot: chatBot,
+                              chatBot: chatBot,
                             );
                           },
                         ),

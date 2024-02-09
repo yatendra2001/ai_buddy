@@ -3,6 +3,7 @@ import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:loggy/loggy.dart';
@@ -19,7 +20,11 @@ Future<void> main() async {
     ..registerAdapter(ChatBotAdapter());
   await Hive.openBox<ChatBot>('chatbots');
 
-  runApp(const AIBuddy());
+  runApp(
+    const ProviderScope(
+      child: AIBuddy(),
+    ),
+  );
 }
 
 void _initLoggy() {

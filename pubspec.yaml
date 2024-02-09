@@ -35,6 +35,10 @@ dependencies:
   dio: ^5.4.0
   path_provider: ^2.1.2
   flutter_secure_storage: ^4.2.1
+  flutter_riverpod: ^2.4.10
+  riverpod_annotation: ^2.3.4
+  file_picker: ^6.1.1
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
