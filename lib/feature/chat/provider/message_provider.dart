@@ -22,10 +22,11 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
     final newMessageList = [...state.messagesList, message.toJson()];
     updateChatBot(
       ChatBot(
-          messagesList: newMessageList,
-          id: state.id,
-          title: state.title,
-          typeOfBot: state.typeOfBot),
+        messagesList: newMessageList,
+        id: state.id,
+        title: state.title,
+        typeOfBot: state.typeOfBot,
+      ),
     );
     await HiveRepository().saveChatBot(chatBot: state);
   }

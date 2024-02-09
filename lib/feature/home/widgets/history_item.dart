@@ -28,16 +28,17 @@ class HistoryItem extends ConsumerWidget {
           AppRoute.chat.push(context);
         },
         style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.onBackground,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-                width: 0.5,
-              ),
+          backgroundColor: Theme.of(context).colorScheme.onBackground,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.outline,
+              width: 0.5,
             ),
-            padding: EdgeInsets.all(8)),
+          ),
+          padding: const EdgeInsets.all(8),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
