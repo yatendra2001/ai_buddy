@@ -1,14 +1,13 @@
+import 'package:ai_buddy/core/config/assets_constants.dart';
+import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
-import 'package:ai_buddy/feature/hive/config/type_of_bot.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -52,18 +51,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                     itemCount: chatBotsList.length,
                     itemBuilder: (context, index) {
                       final chatBot = chatBotsList[index];
+                      final imagePath = chatBot.typeOfBot == TypeOfBot.pdf
+                          ? AssetConstants.pdfLogo
+                          : chatBot.typeOfBot == TypeOfBot.image
+                              ? AssetConstants.imageLogo
+                              : AssetConstants.pdfLogo;
+                      final tileColor = chatBot.typeOfBot == TypeOfBot.pdf
+                          ? Theme.of(context).colorScheme.primary
+                          : chatBot.typeOfBot == TypeOfBot.text
+                              ? Theme.of(context).colorScheme.secondary
+                              : Theme.of(context).colorScheme.tertiary;
                       return HistoryItem(
-                        iconData: chatBot.typeOfBot == TypeOfBot.pdf
-                            ? Entypo.book_open
-                            : chatBot.typeOfBot == TypeOfBot.image
-                                ? FontAwesomeIcons.images
-                                : Linecons.comment,
+                        imagePath: imagePath,
                         label: chatBot.title,
-                        color: chatBot.typeOfBot == TypeOfBot.pdf
-                            ? Theme.of(context).colorScheme.primary
-                            : chatBot.typeOfBot == TypeOfBot.text
-                                ? Theme.of(context).colorScheme.secondary
-                                : Theme.of(context).colorScheme.tertiary,
+                        color: tileColor,
                         chatBot: chatBot,
                       );
                     },
@@ -118,19 +119,30 @@ class _HomePageState extends ConsumerState<HomePage> {
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.25),
+                          color: Colors.white.withOpacity(0.25),
                           offset: const Offset(4, 4),
                           blurRadius: 8,
                         ),
                       ],
                     ),
-                    child: Text(
-                      'Personal AI Buddy',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.background,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Personal AI Buddy',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Image.asset(
+                          AssetConstants.aiStarLogo,
+                          scale: 20,
+                        )
+                      ],
                     ),
                   ),
                   const SizedBox(
@@ -156,7 +168,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         child: CardButton(
                           title: 'Chat\nwith PDF',
                           color: Theme.of(context).colorScheme.primary,
-                          icondata: Entypo.book_open,
+                          imagePath: AssetConstants.pdfLogo,
                           isMainButton: true,
                           onPressed: () => AppRoute.chat.push(context),
                         ),
@@ -168,13 +180,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                             CardButton(
                               title: 'Chat with AI',
                               color: Theme.of(context).colorScheme.secondary,
-                              icondata: Linecons.comment,
+                              imagePath: AssetConstants.textLogo,
                               isMainButton: false,
                               onPressed: () {
                                 final chatBot = ChatBot(
                                   messagesList: [],
                                   id: uniqueGeneratedId,
-                                  title: 'Placeholder title',
+                                  title: '',
                                   typeOfBot: TypeOfBot.text,
                                 );
                                 ref
@@ -191,7 +203,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             CardButton(
                               title: 'Ask Image',
                               color: Theme.of(context).colorScheme.tertiary,
-                              icondata: FontAwesomeIcons.images,
+                              imagePath: AssetConstants.imageLogo,
                               isMainButton: false,
                               onPressed: () => AppRoute.chat.push(context),
                             ),
@@ -266,7 +278,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                             .withOpacity(0.95),
                                       ),
                                 ),
-                                const FaIcon(Entypo.back_in_time),
+                                const Icon(CupertinoIcons.cube_box),
                                 const SizedBox(width: 12),
                               ],
                             ),
@@ -282,18 +294,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                               const SizedBox(height: 4),
                           itemBuilder: (context, index) {
                             final chatBot = chatBotsList[index];
+                            final imagePath = chatBot.typeOfBot == TypeOfBot.pdf
+                                ? AssetConstants.pdfLogo
+                                : chatBot.typeOfBot == TypeOfBot.image
+                                    ? AssetConstants.imageLogo
+                                    : AssetConstants.pdfLogo;
+                            final tileColor = chatBot.typeOfBot == TypeOfBot.pdf
+                                ? Theme.of(context).colorScheme.primary
+                                : chatBot.typeOfBot == TypeOfBot.text
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.tertiary;
                             return HistoryItem(
                               label: chatBot.title,
-                              iconData: chatBot.typeOfBot == TypeOfBot.pdf
-                                  ? Entypo.book_open
-                                  : chatBot.typeOfBot == TypeOfBot.image
-                                      ? FontAwesomeIcons.images
-                                      : Linecons.comment,
-                              color: chatBot.typeOfBot == TypeOfBot.pdf
-                                  ? Theme.of(context).colorScheme.primary
-                                  : chatBot.typeOfBot == TypeOfBot.text
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Theme.of(context).colorScheme.tertiary,
+                              imagePath: imagePath,
+                              color: tileColor,
                               chatBot: chatBot,
                             );
                           },

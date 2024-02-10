@@ -1,6 +1,6 @@
+import 'package:ai_buddy/core/config/type_of_message.dart';
 import 'package:ai_buddy/core/logger/logger.dart';
 import 'package:ai_buddy/feature/gemini/gemini.dart';
-import 'package:ai_buddy/feature/hive/config/type_of_message.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/hive/model/chat_message/chat_message.dart';
 import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
@@ -24,7 +24,7 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
       ChatBot(
         messagesList: newMessageList,
         id: state.id,
-        title: state.title,
+        title: state.title.isEmpty ? message.text : state.title,
         typeOfBot: state.typeOfBot,
       ),
     );
@@ -90,8 +90,7 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
             messagesList: newMessagesList,
             attachmentPath: state.attachmentPath,
           );
-          state = newState;
-          updateChatBot(state);
+          updateChatBot(newState);
           await HiveRepository().saveChatBot(chatBot: state);
         }
       }

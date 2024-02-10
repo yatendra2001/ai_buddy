@@ -3,8 +3,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:ai_buddy/core/config/gemini_model_constants.dart';
 import 'package:ai_buddy/feature/gemini/gemini.dart';
-import 'package:ai_buddy/feature/gemini/src/config/constants.dart';
 import 'package:ai_buddy/feature/gemini/src/models/candidates/candidates.dart';
 import 'package:ai_buddy/feature/gemini/src/repository/base_gemini_repository.dart';
 import 'package:ai_buddy/feature/gemini/src/repository/network_service.dart';
@@ -38,7 +38,7 @@ class GeminiRepository implements BaseGeminiRepository {
     Gemini.instance.typeProvider?.clear();
 
     final response = await api.post(
-      '${modelName ?? Constants.defaultModel}:${Constants.defaultGenerateType}',
+      '${modelName ?? GeminiModelConstants.defaultModel}:${GeminiModelConstants.defaultGenerateType}',
       data: {'contents': chats.map((e) => e.toJson()).toList()},
       generationConfig: generationConfig,
       safetySettings: safetySettings,
@@ -58,7 +58,7 @@ class GeminiRepository implements BaseGeminiRepository {
   }) async {
     Gemini.instance.typeProvider?.clear();
     final response = await api.post(
-      '${modelName ?? Constants.defaultModel}:countTokens',
+      '${modelName ?? GeminiModelConstants.defaultModel}:countTokens',
       data: {
         'contents': [
           {
@@ -106,7 +106,7 @@ class GeminiRepository implements BaseGeminiRepository {
     Gemini.instance.typeProvider?.clear();
 
     final response = await api.post(
-      '${modelName ?? Constants.defaultModel}:streamGenerateContent',
+      '${modelName ?? GeminiModelConstants.defaultModel}:streamGenerateContent',
       isStreamResponse: true,
       data: {'contents': chats.map((e) => e.toJson()).toList()},
       generationConfig: generationConfig,
@@ -184,7 +184,7 @@ class GeminiRepository implements BaseGeminiRepository {
       '${modelName ?? (
             (images?.isNotEmpty ?? false)
                 ? 'models/gemini-pro-vision'
-                : Constants.defaultModel,
+                : GeminiModelConstants.defaultModel,
           )}:streamGenerateContent',
       isStreamResponse: true,
       data: {
@@ -276,7 +276,7 @@ class GeminiRepository implements BaseGeminiRepository {
   }) async {
     Gemini.instance.typeProvider?.clear();
     final response = await api.post(
-      "${modelName ?? 'models/gemini-pro-vision'}:${Constants.defaultGenerateType}",
+      "${modelName ?? 'models/gemini-pro-vision'}:${GeminiModelConstants.defaultGenerateType}",
       data: {
         'contents': [
           {
@@ -312,7 +312,7 @@ class GeminiRepository implements BaseGeminiRepository {
   }) async {
     Gemini.instance.typeProvider?.clear();
     final response = await api.post(
-      '${modelName ?? Constants.defaultModel}:${Constants.defaultGenerateType}',
+      '${modelName ?? GeminiModelConstants.defaultModel}:${GeminiModelConstants.defaultGenerateType}',
       data: {
         'contents': [
           {

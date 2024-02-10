@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class CardButton extends StatelessWidget {
   const CardButton({
     required this.title,
-    required this.icondata,
+    required this.imagePath,
     required this.color,
     required this.isMainButton,
     required this.onPressed,
     super.key,
   });
   final String title;
-  final IconData icondata;
+  final String imagePath;
   final Color color;
   final bool isMainButton;
   final VoidCallback onPressed;
@@ -37,9 +37,12 @@ class CardButton extends StatelessWidget {
               CircleAvatar(
                 backgroundColor:
                     Theme.of(context).colorScheme.background.withOpacity(0.2),
-                child: Icon(
-                  icondata,
-                  color: Theme.of(context).colorScheme.background,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Image.asset(
+                    imagePath,
+                    color: Theme.of(context).colorScheme.background,
+                  ),
                 ),
               ),
               Icon(

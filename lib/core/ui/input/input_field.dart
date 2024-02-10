@@ -28,38 +28,6 @@ class InputField extends StatefulWidget {
           validator: Validators.required,
         );
 
-  const InputField.email({
-    required TextEditingController controller,
-    String label = 'Email',
-    TextInputAction textInputAction = TextInputAction.next,
-    Key? key,
-  }) : this(
-          key: key,
-          controller: controller,
-          label: label,
-          textInputAction: textInputAction,
-          keyboardType: TextInputType.emailAddress,
-          autofillHints: const [AutofillHints.email],
-          validator: Validators.email,
-        );
-
-  const InputField.password({
-    required TextEditingController controller,
-    String label = 'Password',
-    TextInputAction textInputAction = TextInputAction.next,
-    ValueChanged<String>? onFieldSubmitted,
-    Key? key,
-  }) : this(
-          key: key,
-          controller: controller,
-          label: label,
-          textInputAction: textInputAction,
-          keyboardType: TextInputType.visiblePassword,
-          autofillHints: const [AutofillHints.password],
-          validator: Validators.password,
-          onFieldSubmitted: onFieldSubmitted,
-        );
-
   final TextEditingController controller;
   final String label;
   final TextInputAction textInputAction;

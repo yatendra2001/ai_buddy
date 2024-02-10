@@ -1,14 +1,13 @@
+import 'package:ai_buddy/core/config/assets_constants.dart';
+import 'package:ai_buddy/core/config/type_of_bot.dart';
+import 'package:ai_buddy/core/config/type_of_message.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
-import 'package:ai_buddy/feature/hive/config/type_of_bot.dart';
-import 'package:ai_buddy/feature/hive/config/type_of_message.dart';
+import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChatPage extends ConsumerWidget {
   const ChatPage({super.key});
@@ -21,11 +20,11 @@ class ChatPage extends ConsumerWidget {
         : chatBot.typeOfBot == TypeOfBot.text
             ? Theme.of(context).colorScheme.secondary
             : Theme.of(context).colorScheme.tertiary;
-    final iconData = chatBot.typeOfBot == TypeOfBot.pdf
-        ? Entypo.book_open
+    final imagePath = chatBot.typeOfBot == TypeOfBot.pdf
+        ? AssetConstants.pdfLogo
         : chatBot.typeOfBot == TypeOfBot.image
-            ? FontAwesomeIcons.images
-            : Linecons.comment;
+            ? AssetConstants.imageLogo
+            : AssetConstants.textLogo;
 
     final List<types.Message> messages = chatBot.messagesList.map((msg) {
       return types.TextMessage(
@@ -74,7 +73,12 @@ class ChatPage extends ConsumerWidget {
                           Icons.arrow_back,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          ref
+                              .read(chatBotListProvider.notifier)
+                              .updateChatBotOnHomeScreen(chatBot);
+                          Navigator.of(context).pop();
+                        },
                       ),
                       Container(
                         alignment: Alignment.center,
@@ -124,10 +128,12 @@ class ChatPage extends ConsumerWidget {
                         child: CircleAvatar(
                           backgroundColor: color,
                           radius: 19,
-                          child: Icon(
-                            iconData,
-                            size: 18,
-                            color: Theme.of(context).colorScheme.surface,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Image.asset(
+                              imagePath,
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
                           ),
                         ),
                       ),

@@ -8,13 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HistoryItem extends ConsumerWidget {
   const HistoryItem({
     required this.label,
-    required this.iconData,
+    required this.imagePath,
     required this.color,
     required this.chatBot,
     super.key,
   });
   final String label;
-  final IconData iconData;
+  final String imagePath;
   final Color color;
   final ChatBot chatBot;
 
@@ -29,6 +29,7 @@ class HistoryItem extends ConsumerWidget {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).colorScheme.onBackground,
+          foregroundColor: color,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -44,11 +45,11 @@ class HistoryItem extends ConsumerWidget {
           children: [
             CircleAvatar(
               backgroundColor: color,
-              radius: 21,
-              child: Icon(
-                iconData,
-                size: 20,
-                color: Theme.of(context).colorScheme.background,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Image.asset(
+                  imagePath,
+                ),
               ),
             ),
             const SizedBox(width: 8),
@@ -64,7 +65,10 @@ class HistoryItem extends ConsumerWidget {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.delete),
+              icon: Icon(
+                Icons.delete,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
               onPressed: () {
                 ref.read(chatBotListProvider.notifier).deleteChatBot(chatBot);
               },

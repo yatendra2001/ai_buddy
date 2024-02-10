@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:ai_buddy/feature/gemini/src/config/constants.dart';
+import 'package:ai_buddy/core/config/gemini_model_constants.dart';
 import 'package:ai_buddy/feature/gemini/src/models/candidates/candidates.dart';
 import 'package:ai_buddy/feature/gemini/src/models/content/content.dart';
 import 'package:ai_buddy/feature/gemini/src/models/gemini_model/gemini_model.dart';
@@ -35,7 +35,7 @@ class Gemini extends BaseGeminiRepository {
             Dio(
               BaseOptions(
                 baseUrl:
-                    '${baseURL ?? Constants.baseUrl}${version ?? Constants.defaultVersion}/',
+                    '${baseURL ?? GeminiModelConstants.baseUrl}${version ?? GeminiModelConstants.defaultVersion}/',
                 contentType: 'application/json',
                 headers: headers,
               ),

@@ -22,6 +22,14 @@ class ChatBotListNotifier extends StateNotifier<List<ChatBot>> {
     state = [...state, chatBot];
   }
 
+  Future<void> updateChatBotOnHomeScreen(ChatBot chatBot) async {
+    final int chatBotIndex =
+        state.indexWhere((existingChatBot) => existingChatBot.id == chatBot.id);
+    if (chatBotIndex != -1) {
+      state[chatBotIndex] = chatBot;
+    }
+  }
+
   Future<void> deleteChatBot(ChatBot chatBot) async {
     await hiveRepository.deleteChatBot(chatBot: chatBot);
     state = state.where((item) => item.id != chatBot.id).toList();

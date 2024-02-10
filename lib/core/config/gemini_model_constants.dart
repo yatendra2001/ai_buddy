@@ -1,7 +1,7 @@
 import 'package:ai_buddy/feature/gemini/src/models/gemini_model/gemini_model.dart';
 
-class Constants {
-  Constants._();
+class GeminiModelConstants {
+  GeminiModelConstants._();
   static const String defaultModel = 'models/gemini-pro';
   static const String defaultVersion = 'v1beta';
   static const String defaultGenerateType = 'generateContent';

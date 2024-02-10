@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
 
   # Common
-  flutter_bloc: ^8.1.3
   loggy: ^2.0.3
   flutter_loggy: ^2.0.2
   go_router: ^11.1.3
@@ -23,10 +22,6 @@ dependencies:
   # iOS
   cupertino_icons: ^1.0.2
   hive: ^2.2.3
-  http: ^1.2.0
-  font_awesome_flutter: ^10.7.0
-  fluttericon: ^2.0.0
-  lottie: ^3.0.0
   flutter_chat_ui: ^1.6.12
   uuid: ^4.3.3
   flutter_chat_types: ^3.6.2
