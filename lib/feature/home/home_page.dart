@@ -1,10 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:ai_buddy/core/config/assets_constants.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
+import 'package:ai_buddy/core/logger/logger.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,13 +23,12 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   final uuid = const Uuid();
-  late final String uniqueGeneratedId;
 
   @override
   void initState() {
     super.initState();
+    logInfo('Initstate called');
     ref.read(chatBotListProvider.notifier).fetchChatBots();
-    uniqueGeneratedId = uuid.v4();
   }
 
   void _showAllHistory(BuildContext context) {
@@ -140,7 +143,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         const SizedBox(width: 4),
                         Image.asset(
                           AssetConstants.aiStarLogo,
-                          scale: 20,
+                          scale: 23,
                         )
                       ],
                     ),
@@ -170,7 +173,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                           color: Theme.of(context).colorScheme.primary,
                           imagePath: AssetConstants.pdfLogo,
                           isMainButton: true,
-                          onPressed: () => AppRoute.chat.push(context),
+                          onPressed: () async {
+                            final result =
+                                await FilePicker.platform.pickFiles();
+                            if (result != null) {
+                              final filePath = result.files.single.path;
+                              // Proceed with processing the PDF file
+                              AppRoute.chat.push(context);
+                            }
+                          },
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -185,7 +196,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               onPressed: () {
                                 final chatBot = ChatBot(
                                   messagesList: [],
-                                  id: uniqueGeneratedId,
+                                  id: uuid.v4(),
                                   title: '',
                                   typeOfBot: TypeOfBot.text,
                                 );
@@ -195,7 +206,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 ref
                                     .read(messageListProvider.notifier)
                                     .updateChatBot(chatBot);
-                                // ignore: use_build_context_synchronously
                                 AppRoute.chat.push(context);
                               },
                             ),
@@ -205,7 +215,27 @@ class _HomePageState extends ConsumerState<HomePage> {
                               color: Theme.of(context).colorScheme.tertiary,
                               imagePath: AssetConstants.imageLogo,
                               isMainButton: false,
-                              onPressed: () => AppRoute.chat.push(context),
+                              onPressed: () async {
+                                final pickedFile = await ref
+                                    .read(chatBotListProvider.notifier)
+                                    .attachImageFilePath();
+                                if (pickedFile != null) {
+                                  final chatBot = ChatBot(
+                                    messagesList: [],
+                                    id: uuid.v4(),
+                                    title: '',
+                                    typeOfBot: TypeOfBot.image,
+                                    attachmentPath: pickedFile,
+                                  );
+                                  await ref
+                                      .read(chatBotListProvider.notifier)
+                                      .saveChatBot(chatBot);
+                                  await ref
+                                      .read(messageListProvider.notifier)
+                                      .updateChatBot(chatBot);
+                                  AppRoute.chat.push(context);
+                                }
+                              },
                             ),
                           ],
                         ),

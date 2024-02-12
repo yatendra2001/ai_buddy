@@ -7,8 +7,7 @@ part of 'generation_config.dart';
 // **************************************************************************
 
 _$GenerationConfigImpl _$$GenerationConfigImplFromJson(
-  Map<String, dynamic> json,
-) =>
+        Map<String, dynamic> json) =>
     _$GenerationConfigImpl(
       stopSequences: (json['stopSequences'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -20,8 +19,7 @@ _$GenerationConfigImpl _$$GenerationConfigImplFromJson(
     );
 
 Map<String, dynamic> _$$GenerationConfigImplToJson(
-  _$GenerationConfigImpl instance,
-) =>
+        _$GenerationConfigImpl instance) =>
     <String, dynamic>{
       'stopSequences': instance.stopSequences,
       'temperature': instance.temperature,

@@ -1,13 +1,15 @@
+import 'dart:io';
+
 import 'package:ai_buddy/core/config/assets_constants.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
-import 'package:ai_buddy/core/config/type_of_message.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
+import 'package:ai_buddy/feature/chat/widgets/chat_interface_widget.dart';
 import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatPage extends ConsumerWidget {
   const ChatPage({super.key});
@@ -25,6 +27,11 @@ class ChatPage extends ConsumerWidget {
         : chatBot.typeOfBot == TypeOfBot.image
             ? AssetConstants.imageLogo
             : AssetConstants.textLogo;
+    final title = chatBot.typeOfBot == TypeOfBot.pdf
+        ? 'PDF'
+        : chatBot.typeOfBot == TypeOfBot.image
+            ? 'Image'
+            : 'Text';
 
     final List<types.Message> messages = chatBot.messagesList.map((msg) {
       return types.TextMessage(
@@ -74,10 +81,10 @@ class ChatPage extends ConsumerWidget {
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                         onPressed: () {
+                          context.pop();
                           ref
                               .read(chatBotListProvider.notifier)
                               .updateChatBotOnHomeScreen(chatBot);
-                          Navigator.of(context).pop();
                         },
                       ),
                       Container(
@@ -98,7 +105,7 @@ class ChatPage extends ConsumerWidget {
                         ),
                         child: Center(
                           child: Text(
-                            'AI Buddy',
+                            '$title Buddy',
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.surface,
                               fontSize: 14,
@@ -107,84 +114,30 @@ class ChatPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 42,
-                      ),
+                      if (chatBot.attachmentPath == null)
+                        const SizedBox(width: 42)
+                      else
+                        CircleAvatar(
+                          maxRadius: 21,
+                          backgroundImage: FileImage(
+                            File(chatBot.attachmentPath!),
+                          ),
+                          child: TextButton(
+                            onPressed: () {},
+                            child: const SizedBox.shrink(),
+                          ),
+                        ),
                     ],
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   Expanded(
-                    child: Chat(
+                    child: ChatInterfaceWidget(
                       messages: messages,
-                      onSendPressed: (text) => ref
-                          .watch(messageListProvider.notifier)
-                          .handleSendPressed(text.text),
-                      user: const types.User(id: TypeOfMessage.user),
-                      showUserAvatars: true,
-                      avatarBuilder: (user) => Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: CircleAvatar(
-                          backgroundColor: color,
-                          radius: 19,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Image.asset(
-                              imagePath,
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
-                          ),
-                        ),
-                      ),
-                      theme: DefaultChatTheme(
-                        backgroundColor: Colors.transparent,
-                        primaryColor: Theme.of(context).colorScheme.onSurface,
-                        secondaryColor: color,
-                        inputBackgroundColor:
-                            Theme.of(context).colorScheme.onBackground,
-                        inputTextColor: Theme.of(context).colorScheme.onSurface,
-                        sendingIcon: Icon(
-                          Icons.send,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        inputTextCursorColor:
-                            Theme.of(context).colorScheme.onSurface,
-                        receivedMessageBodyTextStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                        ),
-                        sentMessageBodyTextStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                        ),
-                        dateDividerTextStyle: TextStyle(
-                          color:
-                              Theme.of(context).colorScheme.onPrimaryContainer,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w800,
-                          height: 1.333,
-                        ),
-                        inputTextStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        inputTextDecoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.zero,
-                          isCollapsed: true,
-                          fillColor: Theme.of(context).colorScheme.onBackground,
-                        ),
-                        inputBorderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        ),
-                      ),
+                      chatBot: chatBot,
+                      color: color,
+                      imagePath: imagePath,
                     ),
                   ),
                 ],

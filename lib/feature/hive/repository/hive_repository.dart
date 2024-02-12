@@ -9,6 +9,7 @@ class HiveRepository implements BaseHiveRepository {
 
   @override
   Future<void> saveChatBot({required ChatBot chatBot}) async {
+    logInfo('Saving chatbot to hive, ID ${chatBot.id}');
     await _chatBot.put(chatBot.id, chatBot);
   }
 
@@ -16,9 +17,6 @@ class HiveRepository implements BaseHiveRepository {
   Future<List<ChatBot>> getChatBots() async {
     final chatBotBox = await Hive.openBox<ChatBot>('chatBots');
     final List<ChatBot> chatBotsList = chatBotBox.values.toList();
-    for (final chat in chatBotsList) {
-      logInfo(chat.id);
-    }
     return chatBotsList;
   }
 

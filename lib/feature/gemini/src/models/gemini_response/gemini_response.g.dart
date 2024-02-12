@@ -14,13 +14,11 @@ _$GeminiResponseImpl _$$GeminiResponseImplFromJson(Map<String, dynamic> json) =>
       promptFeedback: json['promptFeedback'] == null
           ? null
           : PromptFeedback.fromJson(
-              json['promptFeedback'] as Map<String, dynamic>,
-            ),
+              json['promptFeedback'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$GeminiResponseImplToJson(
-  _$GeminiResponseImpl instance,
-) =>
+        _$GeminiResponseImpl instance) =>
     <String, dynamic>{
       'candidates': instance.candidates,
       'promptFeedback': instance.promptFeedback,

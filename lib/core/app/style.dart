@@ -193,7 +193,7 @@ ThemeData _getTheme() {
       style: TextButton.styleFrom(
         shape: buttonShape,
         padding: buttonPadding,
-        foregroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
         textStyle: buttonTextStyle,
       ),
     ),
