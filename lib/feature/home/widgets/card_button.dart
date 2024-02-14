@@ -1,3 +1,4 @@
+import 'package:ai_buddy/core/extension/context.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,18 +37,18 @@ class CardButton extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor:
-                    Theme.of(context).colorScheme.background.withOpacity(0.2),
+                    context.colorScheme.background.withOpacity(0.2),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Image.asset(
                     imagePath,
-                    color: Theme.of(context).colorScheme.background,
+                    color: context.colorScheme.background,
                   ),
                 ),
               ),
               Icon(
                 CupertinoIcons.arrow_up_right,
-                color: Theme.of(context).colorScheme.background,
+                color: context.colorScheme.background,
                 size: 32,
               ),
             ],
@@ -59,10 +60,10 @@ class CardButton extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: Text(
               title,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.background,
-                    fontSize: isMainButton ? 32 : 18,
-                  ),
+              style: context.textTheme.bodyLarge!.copyWith(
+                color: context.colorScheme.background,
+                fontSize: isMainButton ? 32 : 18,
+              ),
             ),
           ),
         ],

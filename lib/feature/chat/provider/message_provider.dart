@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/config/type_of_message.dart';
 import 'package:ai_buddy/core/logger/logger.dart';
 import 'package:ai_buddy/feature/gemini/gemini.dart';
-import 'package:ai_buddy/feature/gemini/src/models/candidates/candidates.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/hive/model/chat_message/chat_message.dart';
 import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
@@ -19,8 +19,8 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
   MessageListNotifier()
       : super(ChatBot(messagesList: [], id: '', title: '', typeOfBot: ''));
 
-  final gemini = Gemini.init(apiKey: 'AIzaSyAa6TGCb-8tlgXve9SUkzUOCukWM2rdczg');
   final uuid = const Uuid();
+  final geminiRepository = GeminiRepository();
 
   Future<void> updateChatBotWithMessage(ChatMessage message) async {
     final newMessageList = [...state.messagesList, message.toJson()];
@@ -31,6 +31,7 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
         title: state.title.isEmpty ? message.text : state.title,
         typeOfBot: state.typeOfBot,
         attachmentPath: state.attachmentPath,
+        embeddings: state.embeddings,
       ),
     );
   }
@@ -48,45 +49,40 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
       chatBotId: state.id,
     );
     await updateChatBotWithMessage(message);
-    await streamGeminiResponse(prompt: text, imageFilePath: imageFilePath);
+    await getGeminiResponse(prompt: text, imageFilePath: imageFilePath);
   }
 
-  Future<void> streamGeminiResponse({
+  Future<void> getGeminiResponse({
     required String prompt,
     String? imageFilePath,
   }) async {
     final List<Parts> chatParts = state.messagesList.map((msg) {
       return Parts(text: msg['text'] as String);
-    }).toList()
-      ..add(Parts(text: prompt));
+    }).toList();
+
+    if (state.typeOfBot == TypeOfBot.pdf) {
+      final embeddingPrompt = await geminiRepository.promptForEmbedding(
+        userPrompt: prompt,
+        embeddings: state.embeddings,
+      );
+      logInfo('Embedding prompt: $embeddingPrompt');
+      chatParts.add(Parts(text: embeddingPrompt));
+    } else {
+      chatParts.add(Parts(text: prompt));
+    }
 
     final content = Content(parts: chatParts);
 
     Stream<Candidates> responseStream;
     ChatMessage placeholderMessage;
 
-    if (imageFilePath == null) {
-      responseStream = gemini.streamChat(
-        [content],
-        safetySettings: [
-          SafetySetting(
-            category: SafetyCategory.hateSpeech,
-            threshold: SafetyThreshold.blockMediumAndAbove,
-          ),
-        ],
-      );
-    } else {
+    if (imageFilePath != null && state.typeOfBot == TypeOfBot.image) {
       final Uint8List imageBytes = File(imageFilePath).readAsBytesSync();
-      responseStream = gemini.streamGenerateContent(
-        prompt,
-        images: [imageBytes],
-        safetySettings: [
-          SafetySetting(
-            category: SafetyCategory.hateSpeech,
-            threshold: SafetyThreshold.blockMediumAndAbove,
-          ),
-        ],
-      );
+      logInfo('Image bytes length: ${imageBytes.length}');
+      responseStream =
+          geminiRepository.streamContent(content: content, image: imageBytes);
+    } else {
+      responseStream = geminiRepository.streamContent(content: content);
     }
 
     final String modelMessageId = uuid.v4();
@@ -117,6 +113,7 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
             typeOfBot: state.typeOfBot,
             messagesList: newMessagesList,
             attachmentPath: state.attachmentPath,
+            embeddings: state.embeddings,
           );
           await updateChatBot(newState);
         }
@@ -127,7 +124,6 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
     });
   }
 
-  // ignore: use_setters_to_change_properties
   Future<void> updateChatBot(ChatBot newChatBot) async {
     state = newChatBot;
     await HiveRepository().saveChatBot(chatBot: state);

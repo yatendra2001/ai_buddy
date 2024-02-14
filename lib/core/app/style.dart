@@ -29,7 +29,8 @@ final _darkColorScheme = ColorScheme(
   onSecondary: _lightest,
   secondaryContainer: _secondary.withOpacity(0.2),
   onSecondaryContainer: _lightest,
-  // Secondary
+
+  // Tertiary
   tertiary: _tertiary,
   onTertiary: _lightest,
   tertiaryContainer: _tertiary.withOpacity(0.2),
@@ -97,6 +98,11 @@ ThemeData _getTheme() {
       color: _background,
       surfaceTintColor: Colors.transparent,
       margin: EdgeInsets.zero,
+    ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: _lightest,
+      selectionColor: _lightest.withOpacity(0.5),
+      selectionHandleColor: _lightest,
     ),
     popupMenuTheme: PopupMenuThemeData(
       color: _background,

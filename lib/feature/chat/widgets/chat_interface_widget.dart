@@ -1,4 +1,5 @@
 import 'package:ai_buddy/core/config/type_of_message.dart';
+import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:flutter/material.dart';
@@ -40,36 +41,36 @@ class ChatInterfaceWidget extends ConsumerWidget {
             padding: const EdgeInsets.all(8),
             child: Image.asset(
               imagePath,
-              color: Theme.of(context).colorScheme.surface,
+              color: context.colorScheme.surface,
             ),
           ),
         ),
       ),
       theme: DefaultChatTheme(
         backgroundColor: Colors.transparent,
-        primaryColor: Theme.of(context).colorScheme.onSurface,
+        primaryColor: context.colorScheme.onSurface,
         secondaryColor: color,
-        inputBackgroundColor: Theme.of(context).colorScheme.onBackground,
-        inputTextColor: Theme.of(context).colorScheme.onSurface,
+        inputBackgroundColor: context.colorScheme.onBackground,
+        inputTextColor: context.colorScheme.onSurface,
         sendingIcon: Icon(
           Icons.send,
-          color: Theme.of(context).colorScheme.onSurface,
+          color: context.colorScheme.onSurface,
         ),
-        inputTextCursorColor: Theme.of(context).colorScheme.onSurface,
+        inputTextCursorColor: context.colorScheme.onSurface,
         receivedMessageBodyTextStyle: TextStyle(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: context.colorScheme.onBackground,
           fontSize: 16,
           fontWeight: FontWeight.w500,
           height: 1.5,
         ),
         sentMessageBodyTextStyle: TextStyle(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: context.colorScheme.onBackground,
           fontSize: 16,
           fontWeight: FontWeight.w500,
           height: 1.5,
         ),
         dateDividerTextStyle: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          color: context.colorScheme.onPrimaryContainer,
           fontSize: 12,
           fontWeight: FontWeight.w800,
           height: 1.333,
@@ -78,13 +79,13 @@ class ChatInterfaceWidget extends ConsumerWidget {
           fontSize: 16,
           fontWeight: FontWeight.w500,
           height: 1.5,
-          color: Theme.of(context).colorScheme.onSurface,
+          color: context.colorScheme.onSurface,
         ),
         inputTextDecoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.zero,
           isCollapsed: true,
-          fillColor: Theme.of(context).colorScheme.onBackground,
+          fillColor: context.colorScheme.onBackground,
         ),
         inputBorderRadius: const BorderRadius.vertical(
           top: Radius.circular(20),

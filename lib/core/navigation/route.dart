@@ -5,6 +5,7 @@ enum AppRoute {
   splash('/'),
   home('/home'),
   chat('/chat'),
+  welcome('/welcome'),
   ;
 
   const AppRoute(this.path);

@@ -6,7 +6,7 @@ abstract class Validators {
 
   static FormFieldValidator<String>? getValidator(TextInputType? keyboardType) {
     return switch (keyboardType) {
-      TextInputType.emailAddress => Validators.email,
+      TextInputType.url => Validators.apiKey,
       TextInputType.number => Validators.number,
       _ => null,
     };
@@ -28,29 +28,13 @@ abstract class Validators {
     return null;
   }
 
-  static String? email(String? email) {
-    if (email == null || email.isEmpty) {
+  static String? apiKey(String? api) {
+    if (api == null || api.isEmpty) {
       return 'Required';
     }
 
-    if (!email.isValidEmail()) {
-      return 'Enter valid email';
-    }
-
-    return null;
-  }
-
-  static String? password(String? password) {
-    if (password == null || password.isEmpty) {
-      return 'Required';
-    }
-
-    if (password.length < 6) {
-      return 'Password must be at least 6 characters long';
-    }
-
-    if (!password.contains(RegExp('[A-Z]'))) {
-      return 'Password must contain at least one capital letter';
+    if (!api.isValidAPIKey()) {
+      return 'Enter valid api key';
     }
 
     return null;
@@ -64,19 +48,6 @@ abstract class Validators {
     final number = num.tryParse(input);
     if (number == null) {
       return 'Enter valid number';
-    }
-
-    return null;
-  }
-
-  static String? positiveInteger(String? input) {
-    if (input == null) {
-      return 'Required';
-    }
-
-    final integer = int.tryParse(input);
-    if (integer == null || integer <= 0) {
-      return 'Enter positive integer';
     }
 
     return null;

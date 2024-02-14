@@ -3,6 +3,7 @@
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/feature/chat/chat_page.dart';
 import 'package:ai_buddy/feature/home/home_page.dart';
+import 'package:ai_buddy/feature/welcome/welcome_page.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
@@ -18,6 +19,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoute.chat.path,
       builder: (context, state) => const ChatPage(),
+    ),
+    GoRoute(
+      path: AppRoute.welcome.path,
+      builder: (context, state) => const WelcomePage(),
     ),
   ],
 );

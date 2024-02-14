@@ -1,3 +1,4 @@
+import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
@@ -28,13 +29,13 @@ class HistoryItem extends ConsumerWidget {
           AppRoute.chat.push(context);
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.onBackground,
+          backgroundColor: context.colorScheme.onBackground,
           foregroundColor: color,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(
-              color: Theme.of(context).colorScheme.outline,
+              color: context.colorScheme.outline,
               width: 0.5,
             ),
           ),
@@ -56,18 +57,18 @@ class HistoryItem extends ConsumerWidget {
             Expanded(
               child: Text(
                 label,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.95),
-                    ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.bodyMedium!.copyWith(
+                  color:
+                      Theme.of(context).colorScheme.onPrimary.withOpacity(0.95),
+                ),
               ),
             ),
             IconButton(
               icon: Icon(
                 Icons.delete,
-                color: Theme.of(context).colorScheme.onSurface,
+                color: context.colorScheme.onSurface,
               ),
               onPressed: () {
                 ref.read(chatBotListProvider.notifier).deleteChatBot(chatBot);

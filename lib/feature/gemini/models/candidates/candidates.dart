@@ -1,5 +1,4 @@
-import 'package:ai_buddy/feature/gemini/src/models/content/content.dart';
-import 'package:ai_buddy/feature/gemini/src/models/safety_ratings/safety_ratings.dart';
+import 'package:ai_buddy/feature/gemini/models/content/content.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,7 +11,6 @@ class Candidates with _$Candidates {
     Content? content,
     String? finishReason,
     int? index,
-    List<SafetyRatings>? safetyRatings,
   }) = _Candidates;
 
   factory Candidates.fromJson(Map<String, Object?> json) =>

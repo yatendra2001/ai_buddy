@@ -1,7 +1,7 @@
 extension StringExtension on String {
-  bool isValidEmail() {
+  bool isValidAPIKey() {
     return RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+      r'^[AIzaSy][A-Za-z0-9_-]{33}$',
     ).hasMatch(this);
   }
 }

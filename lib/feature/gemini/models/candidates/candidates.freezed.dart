@@ -23,7 +23,6 @@ mixin _$Candidates {
   Content? get content => throw _privateConstructorUsedError;
   String? get finishReason => throw _privateConstructorUsedError;
   int? get index => throw _privateConstructorUsedError;
-  List<SafetyRatings>? get safetyRatings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,11 +36,7 @@ abstract class $CandidatesCopyWith<$Res> {
           Candidates value, $Res Function(Candidates) then) =
       _$CandidatesCopyWithImpl<$Res, Candidates>;
   @useResult
-  $Res call(
-      {Content? content,
-      String? finishReason,
-      int? index,
-      List<SafetyRatings>? safetyRatings});
+  $Res call({Content? content, String? finishReason, int? index});
 
   $ContentCopyWith<$Res>? get content;
 }
@@ -62,7 +57,6 @@ class _$CandidatesCopyWithImpl<$Res, $Val extends Candidates>
     Object? content = freezed,
     Object? finishReason = freezed,
     Object? index = freezed,
-    Object? safetyRatings = freezed,
   }) {
     return _then(_value.copyWith(
       content: freezed == content
@@ -77,10 +71,6 @@ class _$CandidatesCopyWithImpl<$Res, $Val extends Candidates>
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int?,
-      safetyRatings: freezed == safetyRatings
-          ? _value.safetyRatings
-          : safetyRatings // ignore: cast_nullable_to_non_nullable
-              as List<SafetyRatings>?,
     ) as $Val);
   }
 
@@ -105,11 +95,7 @@ abstract class _$$CandidatesImplCopyWith<$Res>
       __$$CandidatesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Content? content,
-      String? finishReason,
-      int? index,
-      List<SafetyRatings>? safetyRatings});
+  $Res call({Content? content, String? finishReason, int? index});
 
   @override
   $ContentCopyWith<$Res>? get content;
@@ -129,7 +115,6 @@ class __$$CandidatesImplCopyWithImpl<$Res>
     Object? content = freezed,
     Object? finishReason = freezed,
     Object? index = freezed,
-    Object? safetyRatings = freezed,
   }) {
     return _then(_$CandidatesImpl(
       content: freezed == content
@@ -144,10 +129,6 @@ class __$$CandidatesImplCopyWithImpl<$Res>
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int?,
-      safetyRatings: freezed == safetyRatings
-          ? _value._safetyRatings
-          : safetyRatings // ignore: cast_nullable_to_non_nullable
-              as List<SafetyRatings>?,
     ));
   }
 }
@@ -155,12 +136,7 @@ class __$$CandidatesImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
-  _$CandidatesImpl(
-      {this.content,
-      this.finishReason,
-      this.index,
-      final List<SafetyRatings>? safetyRatings})
-      : _safetyRatings = safetyRatings;
+  _$CandidatesImpl({this.content, this.finishReason, this.index});
 
   factory _$CandidatesImpl.fromJson(Map<String, dynamic> json) =>
       _$$CandidatesImplFromJson(json);
@@ -171,19 +147,10 @@ class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
   final String? finishReason;
   @override
   final int? index;
-  final List<SafetyRatings>? _safetyRatings;
-  @override
-  List<SafetyRatings>? get safetyRatings {
-    final value = _safetyRatings;
-    if (value == null) return null;
-    if (_safetyRatings is EqualUnmodifiableListView) return _safetyRatings;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Candidates(content: $content, finishReason: $finishReason, index: $index, safetyRatings: $safetyRatings)';
+    return 'Candidates(content: $content, finishReason: $finishReason, index: $index)';
   }
 
   @override
@@ -193,8 +160,7 @@ class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
       ..add(DiagnosticsProperty('type', 'Candidates'))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('finishReason', finishReason))
-      ..add(DiagnosticsProperty('index', index))
-      ..add(DiagnosticsProperty('safetyRatings', safetyRatings));
+      ..add(DiagnosticsProperty('index', index));
   }
 
   @override
@@ -205,15 +171,12 @@ class _$CandidatesImpl with DiagnosticableTreeMixin implements _Candidates {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.finishReason, finishReason) ||
                 other.finishReason == finishReason) &&
-            (identical(other.index, index) || other.index == index) &&
-            const DeepCollectionEquality()
-                .equals(other._safetyRatings, _safetyRatings));
+            (identical(other.index, index) || other.index == index));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, content, finishReason, index,
-      const DeepCollectionEquality().hash(_safetyRatings));
+  int get hashCode => Object.hash(runtimeType, content, finishReason, index);
 
   @JsonKey(ignore: true)
   @override
@@ -233,8 +196,7 @@ abstract class _Candidates implements Candidates {
   factory _Candidates(
       {final Content? content,
       final String? finishReason,
-      final int? index,
-      final List<SafetyRatings>? safetyRatings}) = _$CandidatesImpl;
+      final int? index}) = _$CandidatesImpl;
 
   factory _Candidates.fromJson(Map<String, dynamic> json) =
       _$CandidatesImpl.fromJson;
@@ -245,8 +207,6 @@ abstract class _Candidates implements Candidates {
   String? get finishReason;
   @override
   int? get index;
-  @override
-  List<SafetyRatings>? get safetyRatings;
   @override
   @JsonKey(ignore: true)
   _$$CandidatesImplCopyWith<_$CandidatesImpl> get copyWith =>

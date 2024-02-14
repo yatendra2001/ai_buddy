@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ai_buddy/core/config/assets_constants.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
+import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/chat/widgets/chat_interface_widget.dart';
 import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
@@ -18,10 +19,10 @@ class ChatPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final chatBot = ref.watch(messageListProvider);
     final color = chatBot.typeOfBot == TypeOfBot.pdf
-        ? Theme.of(context).colorScheme.primary
+        ? context.colorScheme.primary
         : chatBot.typeOfBot == TypeOfBot.text
-            ? Theme.of(context).colorScheme.secondary
-            : Theme.of(context).colorScheme.tertiary;
+            ? context.colorScheme.secondary
+            : context.colorScheme.tertiary;
     final imagePath = chatBot.typeOfBot == TypeOfBot.pdf
         ? AssetConstants.pdfLogo
         : chatBot.typeOfBot == TypeOfBot.image
@@ -58,7 +59,7 @@ class ChatPage extends ConsumerWidget {
                   gradient: RadialGradient(
                     colors: [
                       color.withOpacity(0.5),
-                      Theme.of(context).colorScheme.background.withOpacity(0.5),
+                      context.colorScheme.background.withOpacity(0.5),
                     ],
                   ),
                 ),
@@ -78,13 +79,13 @@ class ChatPage extends ConsumerWidget {
                       IconButton(
                         icon: Icon(
                           Icons.arrow_back,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: context.colorScheme.onSurface,
                         ),
                         onPressed: () {
-                          context.pop();
                           ref
                               .read(chatBotListProvider.notifier)
                               .updateChatBotOnHomeScreen(chatBot);
+                          context.pop();
                         },
                       ),
                       Container(
@@ -107,26 +108,50 @@ class ChatPage extends ConsumerWidget {
                           child: Text(
                             '$title Buddy',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.surface,
+                              color: context.colorScheme.surface,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
-                      if (chatBot.attachmentPath == null)
-                        const SizedBox(width: 42)
-                      else
+                      if (chatBot.typeOfBot == TypeOfBot.image)
                         CircleAvatar(
                           maxRadius: 21,
                           backgroundImage: FileImage(
                             File(chatBot.attachmentPath!),
                           ),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog<AlertDialog>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: SingleChildScrollView(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Image.file(
+                                          File(chatBot.attachmentPath!),
+                                        ),
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Close'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                             child: const SizedBox.shrink(),
                           ),
-                        ),
+                        )
+                      else
+                        const SizedBox(width: 42),
                     ],
                   ),
                   const SizedBox(
