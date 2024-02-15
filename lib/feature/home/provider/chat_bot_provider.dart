@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:ai_buddy/core/logger/logger.dart';
 import 'package:ai_buddy/feature/gemini/repository/gemini_repository.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
@@ -92,7 +91,6 @@ class ChatBotListNotifier extends StateNotifier<List<ChatBot>> {
         pageTextChunks.add(secondHalfText.toString());
       }
     }
-    logInfo('Total Chunks Extracted: ${pageTextChunks.length}');
     return pageTextChunks;
   }
 }

@@ -65,7 +65,6 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
         userPrompt: prompt,
         embeddings: state.embeddings,
       );
-      logInfo('Embedding prompt: $embeddingPrompt');
       chatParts.add(Parts(text: embeddingPrompt));
     } else {
       chatParts.add(Parts(text: prompt));
@@ -78,7 +77,6 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
 
     if (imageFilePath != null && state.typeOfBot == TypeOfBot.image) {
       final Uint8List imageBytes = File(imageFilePath).readAsBytesSync();
-      logInfo('Image bytes length: ${imageBytes.length}');
       responseStream =
           geminiRepository.streamContent(content: content, image: imageBytes);
     } else {

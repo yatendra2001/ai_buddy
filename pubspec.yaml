@@ -13,7 +13,6 @@ dependencies:
 
   # Common
   loggy: ^2.0.3
-  flutter_loggy: ^2.0.2
   go_router: ^11.1.3
   url_launcher: ^6.1.14
   google_fonts: ^6.1.0

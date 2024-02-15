@@ -1,4 +1,3 @@
-import 'package:ai_buddy/core/logger/logger.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/hive/repository/base_hive_repository.dart';
 import 'package:hive/hive.dart';
@@ -16,9 +15,6 @@ class HiveRepository implements BaseHiveRepository {
   Future<List<ChatBot>> getChatBots() async {
     final chatBotBox = await Hive.openBox<ChatBot>('chatBots');
     final List<ChatBot> chatBotsList = chatBotBox.values.toList();
-    logInfo('ChatBots embeddings map: ${chatBotsList.map(
-      (chatBot) => chatBot.embeddings,
-    )}');
     return chatBotsList;
   }
 
