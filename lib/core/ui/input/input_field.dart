@@ -1,3 +1,4 @@
+import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/core/util/validators.dart';
 import 'package:flutter/material.dart';
 
@@ -12,21 +13,6 @@ class InputField extends StatefulWidget {
     this.onFieldSubmitted,
     super.key,
   });
-
-  const InputField.name({
-    required TextEditingController controller,
-    String label = 'Name',
-    TextInputAction textInputAction = TextInputAction.next,
-    Key? key,
-  }) : this(
-          key: key,
-          controller: controller,
-          label: label,
-          textInputAction: textInputAction,
-          keyboardType: TextInputType.name,
-          autofillHints: const [AutofillHints.name],
-          validator: Validators.required,
-        );
 
   final TextEditingController controller;
   final String label;
@@ -72,7 +58,6 @@ class _InputFieldState extends State<InputField> {
       obscureText: _obscureText,
       validator: validator,
       autofillHints: widget.autofillHints,
-      onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         labelText: widget.label,
         suffixIcon: _isPassword
@@ -83,6 +68,10 @@ class _InputFieldState extends State<InputField> {
                     : const Icon(Icons.visibility_sharp),
               )
             : null,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: context.colorScheme.onSurface),
+        ),
       ),
     );
   }

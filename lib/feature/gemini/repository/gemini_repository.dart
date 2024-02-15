@@ -5,13 +5,14 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:ai_buddy/core/logger/logger.dart';
+import 'package:ai_buddy/core/util/secure_storage.dart';
 import 'package:ai_buddy/feature/gemini/gemini.dart';
 import 'package:ai_buddy/feature/gemini/repository/base_gemini_repository.dart';
 import 'package:dio/dio.dart';
 
 class GeminiRepository extends BaseGeminiRepository {
   GeminiRepository();
-  final geminiAPIKey = 'AIzaSyAa6TGCb-8tlgXve9SUkzUOCukWM2rdczg';
+
   final dio = Dio();
   final splitter = const LineSplitter();
   static const baseUrl =
@@ -27,6 +28,7 @@ class GeminiRepository extends BaseGeminiRepository {
     Uint8List? image,
   }) async* {
     try {
+      final geminiAPIKey = await SecureStorage().getApiKey();
       Object? mapData = {};
       final model = image == null ? 'gemini-pro' : 'gemini-pro-vision';
       if (image == null) {
@@ -150,6 +152,7 @@ class GeminiRepository extends BaseGeminiRepository {
     required List<String> textChunks,
   }) async {
     try {
+      final geminiAPIKey = await SecureStorage().getApiKey();
       final Map<String, List<num>> embeddingsMap = {};
       const int chunkSize = 100;
 
@@ -201,6 +204,7 @@ class GeminiRepository extends BaseGeminiRepository {
     required Map<String, List<num>>? embeddings,
   }) async {
     try {
+      final geminiAPIKey = await SecureStorage().getApiKey();
       final response = await dio.post(
         '$baseUrl/embedding-001:embedContent?key=$geminiAPIKey',
         options: Options(headers: {'Content-Type': 'application/json'}),

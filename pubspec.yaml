@@ -33,10 +33,11 @@ dependencies:
   image_picker: ^1.0.7
   syncfusion_flutter_pdf: ^24.2.4
   syncfusion_flutter_pdfviewer: ^24.2.5
+  flutter_spinkit: ^5.2.0
+  lottie: ^3.0.0
 
   # iOS
   cupertino_icons: ^1.0.2
-  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:

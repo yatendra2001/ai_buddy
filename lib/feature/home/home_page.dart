@@ -4,10 +4,12 @@ import 'package:ai_buddy/core/config/assets_constants.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
+import 'package:ai_buddy/core/util/secure_storage.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/home/provider/chat_bot_provider.dart';
 import 'package:ai_buddy/feature/home/widgets/widgets.dart';
+import 'package:ai_buddy/feature/welcome/widgets/api_key_bottom_sheet.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,30 +67,35 @@ class _HomePageState extends ConsumerState<HomePage> {
                     color: context.colorScheme.onSurface,
                     borderRadius: BorderRadius.circular(2),
                   ),
-                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  margin: const EdgeInsets.only(top: 8, bottom: 16),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: chatBotsList.length,
-                    itemBuilder: (context, index) {
-                      final chatBot = chatBotsList[index];
-                      final imagePath = chatBot.typeOfBot == TypeOfBot.pdf
-                          ? AssetConstants.pdfLogo
-                          : chatBot.typeOfBot == TypeOfBot.image
-                              ? AssetConstants.imageLogo
-                              : AssetConstants.textLogo;
-                      final tileColor = chatBot.typeOfBot == TypeOfBot.pdf
-                          ? context.colorScheme.primary
-                          : chatBot.typeOfBot == TypeOfBot.text
-                              ? context.colorScheme.secondary
-                              : context.colorScheme.tertiary;
-                      return HistoryItem(
-                        imagePath: imagePath,
-                        label: chatBot.title,
-                        color: tileColor,
-                        chatBot: chatBot,
-                      );
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: ListView.separated(
+                      itemCount: chatBotsList.length,
+                      itemBuilder: (context, index) {
+                        final chatBot = chatBotsList[index];
+                        final imagePath = chatBot.typeOfBot == TypeOfBot.pdf
+                            ? AssetConstants.pdfLogo
+                            : chatBot.typeOfBot == TypeOfBot.image
+                                ? AssetConstants.imageLogo
+                                : AssetConstants.textLogo;
+                        final tileColor = chatBot.typeOfBot == TypeOfBot.pdf
+                            ? context.colorScheme.primary
+                            : chatBot.typeOfBot == TypeOfBot.text
+                                ? context.colorScheme.secondary
+                                : context.colorScheme.tertiary;
+                        return HistoryItem(
+                          imagePath: imagePath,
+                          label: chatBot.title,
+                          color: tileColor,
+                          chatBot: chatBot,
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 4),
+                    ),
                   ),
                 ),
               ],
@@ -140,41 +147,87 @@ class _HomePageState extends ConsumerState<HomePage> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: Column(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: context.colorScheme.onSurface,
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.white.withOpacity(0.25),
-                                offset: const Offset(4, 4),
-                                blurRadius: 8,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(
+                              width: 60,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
                               ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Personal AI Buddy',
-                                style: TextStyle(
-                                  color: context.colorScheme.background,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                              decoration: BoxDecoration(
+                                color: context.colorScheme.onSurface,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(0.25),
+                                    offset: const Offset(4, 4),
+                                    blurRadius: 8,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Personal AI Buddy',
+                                    style: TextStyle(
+                                      color: context.colorScheme.background,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Image.asset(
+                                    AssetConstants.aiStarLogo,
+                                    scale: 23,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            CircleAvatar(
+                              maxRadius: 16,
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withOpacity(0.2),
+                              child: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.settings,
+                                  size: 18,
                                 ),
+                                style: IconButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                ),
+                                onPressed: () async {
+                                  final apiKey =
+                                      await SecureStorage().getApiKey();
+                                  await showModalBottomSheet<void>(
+                                    context: context,
+                                    isScrollControlled: false,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20),
+                                      ),
+                                    ),
+                                    builder: (context) {
+                                      final TextEditingController
+                                          apiKeyController =
+                                          TextEditingController(text: apiKey);
+                                      return APIKeyBottomSheet(
+                                        apiKeyController: apiKeyController,
+                                        isCalledFromHomePage: true,
+                                      );
+                                    },
+                                  );
+                                },
                               ),
-                              const SizedBox(width: 4),
-                              Image.asset(
-                                AssetConstants.aiStarLogo,
-                                scale: 23,
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         const SizedBox(
                           height: 16,
