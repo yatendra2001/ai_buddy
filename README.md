@@ -1,249 +1,171 @@
-# AI Buddy App Starter
-
-👋 Hey, welcome to AI Buddy App.
-
-Watch/star this repo to be notified when updates are pushed.
-
-## Table of Contents
-
-<!-- TOC -->
-* [AI Buddy App Starter](#scalable-flutter-app-starter)
-  * [Table of Contents](#table-of-contents)
-  * [What is AI Buddy App?](#what-is-scalable-flutter-app)
-  * [Requirements](#requirements)
-  * [About the Author](#about-the-author)
-* [Features](#features)
-  * [AI Buddy App Pro](#scalable-flutter-app-pro)
-* [Docs](#docs)
-  * [Code Architecture](#code-architecture)
-  * [Styling](#styling)
-  * [Google Fonts](#google-fonts)
-  * [Useful GitHub Pull Request Settings](#useful-github-pull-request-settings)
-* [FAQ](#faq)
-  * [Why bloc and not X?](#why-bloc-and-not-x)
-  * [Who is AI Buddy App for?](#who-is-scalable-flutter-app-for)
-  * [Where to learn Flutter basics?](#where-to-learn-flutter-basics)
-  * [What if I don't need a specific feature?](#what-if-i-dont-need-a-specific-feature)
-  * [What if I want more?](#what-if-i-want-more)
-* [Resources](#resources)
-* [Feedback](#feedback)
-<!-- TOC -->
-
-## What is AI Buddy App?
-
-AI Buddy App is a starter template for Flutter apps.
-
-It's designed to be scalable and easy to maintain. And should save you weeks of development time.
-
-To get started, click on the green "Use this template" button on the top-right.
-
-## Requirements
-
-Always keep up to date:
-
-- Flutter
-- Cocoapods
-- Firebase CLI
-
-## About the Author
-
-I'm Milos Jokic and I:
-
-- built my first mobile app in 2007
-- grew my apps to 214k users and $106,140 revenue.
-- built apps for 10 Toptal clients.
-
-And now I run a 6-figure devs agency where we launch MVPs in 4 weeks using Flutter & Firebase.
-
-You can find me on:
-
-- [LinkedIn](https://www.linkedin.com/in/milos-jokic/)
-- [Twitter](https://twitter.com/miloshjokic)
-- [Newsletter](http://flutterpreneur.com/)
-
-# Features
-
-| Feature                                                              | Starter | Pro |
-|----------------------------------------------------------------------|---------|-----|
-| Platforms: Android, iOS, web                                         | ✅       | ✅   |
-| Scalable Architecture using [flutter_bloc](https://bloclibrary.dev/) | ✅       | ✅   |
-| Navigation using [go_router](https://pub.dev/packages/go_router)     | ✅       | ✅   |
-| Scalable App Styling                                                 | ✅       | ✅   |
-| GitHub Actions - code and formatting check                           | ✅       | ✅   |
-| Responsive Design                                                    | ✅       | ✅   |
-| UserMockProvider                                                     | ✅       | ✅   |
-| Profile Page                                                         | ✅       | ✅   |
-| Settings Page: sign out, app version...                              | ✅       | ✅   |
-| Legal: Terms, Policy, Data Deletion                                  | ✅       | ✅   |
-| Google Fonts                                                         | ✅       | ✅   |
-| Sign in and Sign Up Pages                                            | ✅       | ✅   |
-| Input Validators                                                     | ✅       | ✅   |
-| Cached network image                                                 | ✅       | ✅   |
-| Email Support                                                        | ❌       | ✅   |
-| Lifetime Updates                                                     | ❌       | ✅   |
-| Firebase Project Integration                                         | ❌       | ✅   |
-| Firebase Authentication                                              | ❌       | ✅   |
-| Firebase Remote Config                                               | ❌       | ✅   |
-| Firebase Crashlytics                                                 | ❌       | ✅   |
-| Firebase Firestore                                                   | ❌       | ✅   |
-| Firebase Analytics                                                   | ❌       | ✅   |
-| Firebase Storage                                                     | ❌       | ✅   |
-| Google Sign In                                                       | ❌       | ✅   |
-| Apple Sign In                                                        | ❌       | ✅   |
-| Common Cubits                                                        | ❌       | ✅   |
-| In App Purchases (RevenueCat)                                        | ❌       | ✅   |
-| App Store Review Request                                             | ❌       | ✅   |
-| Local Notifications                                                  | ❌       | ✅   |
-| Remote Notifications (Firebase)                                      | ❌       | ✅   |
-| HTTP Requests                                                        | ❌       | ✅   |
-| Local Storage                                                        | ❌       | ✅   |
-| Permissions                                                          | ❌       | ✅   |
-| Environments                                                         | ❌       | ✅   |
-| Localization                                                         | ❌       | ✅   |
-| Dark Mode                                                            | ❌       | ✅   |
-| Connectivity check                                                   | ❌       | ✅   |
-| Hive - local database                                                | ❌       | ✅   |
-| MixPanel - analytics                                                 | ❌       | ✅   |
-| Android - Release Signing                                            | ❌       | ✅   |
-| Onboarding                                                           | ❌       | ✅   |
-| Forgot Password                                                      | ❌       | ✅   |
-| 🎉 BONUS: Scalable Firebase Backend Template                         | ❌       | ✅   |
 
-## AI Buddy App Pro
+<!-- PROJECT LOGO -->
 
-[Grab AI Buddy App - Pro Here](https://AIBuddy.com/)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-# Docs
+<br />
+<div align="center">
+  <a href="https://github.com/yatendra2001/ai_buddy">
+    <img src="https://github.com/yatendra2001/gemini_chat/assets/62821607/1e31abfa-7fe7-4775-a6c7-185ba03b48ef"  alt="Logo" width="200" height="200" >
+  </a>
+  <h1 align="center" >AI Buddy</h1>
+  <h4 align="center">
+    Your personal completely open-sourced and free-to-use AI buddy, built with gemini & flutter.
+  </h4>
+</div>
 
-## Code Architecture
 
-The code architecture is based on
-[flutter_bloc architecture proposal](https://bloclibrary.dev/#/architecture).
 
-There are 4 layers:
+<!-- Project Features -->
+## Features
 
-1. UI (Flutter Widgets)
-2. BLoC (stateful business logic)
-3. Repository (high-level API)
-4. Provider (low-level implementation)
+AI Buddy is a cross-platform mobile application that leverages the power of AI to provide users with a personal assistant capable of understanding and responding to various queries.
 
-And there's only 1 communication rule that we must follow:
+| Chat with PDF | Ask Image | Text Chatbot | 
+| --- | ----------- | ------ | 
+| <img height="600" alt="Chat with PDF" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/66c9a316-0e34-42e4-a791-912e78a582da"> | <img height="600" alt="Ask Image" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/983911b5-22a9-40bf-8a16-7b1294f3e44e"> | <img height="600" alt="Text Chatbot" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/f26221c7-666b-49b3-91ee-47ec17dba728"> |
 
-_**The layer can only call the one layer below it.**_
+<!-- ARCHITECTURE -->
+## Architecture
 
-That means that:
+The architecture of the AI Buddy app is designed to efficiently process and interact with PDF documents. Here's a breakdown of the workflow:
 
-- UI can only call BLoC
-- BLoC can only call Repository
-- Repository can only call Provider
-- Provider can only call external services (Firebase, HTTP, etc.)
+### Overview
 
-And we avoid same-layer communication (as it creates interdependencies):
+The "Chat with PDF" feature of the AI Buddy app allows users to interact with the content of a PDF document in a conversational manner. The app extracts information from the PDF, processes it, and provides relevant responses to user queries.
 
-- `UserRepository` calling `AuthRepository` is _**not**_ allowed.
-- `UserCubit` calling `UserRepository` and `AuthRepository` is allowed.
+### Workflow Diagram
 
-When creating Providers, Repositories, and Cubits we follow this rule:
+![Chat with PDF Flutter App Architecture](https://github.com/yatendra2001/gemini_chat/assets/62821607/19015b9b-ef95-43fa-b06f-e5acf608bb1b)
 
-- Providers are created top-level (so that they can be used in multiple Repositories)
-- Repositories are created top-level (so that they can be used in multiple Cubits)
-- Cubits are created in the router builder callbacks (so that they're accessible only where needed)
-- Cubits that are used in multiple screens are created top-level
+### Workflow Steps
 
-## Styling
+1. **PDF Extraction**: The PDF document is processed to extract its pages.
 
-Styling is based on [Google's Material Design](https://material.io/design).
+2. **Chunking**: The extracted pages are then split into manageable chunks for processing.
 
-App-wide styling is defined in `core/app/style.dart` and is easy to update.
+3. **Batching**: Chunks are grouped into batches (e.g., 1 batch = 100 chunks) for parallel processing.
 
-Here's a quick tip on custom Widget params. There are 2 Widget param types:
+4. **Embedding Generation**: Each batch is sent to an Embeddings API with the task type set to 'Document'. The API generates a list of vector embeddings for each chunk.
 
-- data (user, title, ...)
-- style (colors, paddings, ...)
+5. **Local Storage**: The generated embeddings for each batch are split into individual chunk embeddings. These embeddings are stored locally using Hive (a key-value database).
 
-Our custom Widgets should only hava data params.
+6. **User Interaction**: When a user inputs an instruction (e.g., "Give me an intro to the book"), the app sends the query to the Embeddings API with the task type set to 'Query' to generate an embedding for the query.
 
-And the style should be done app-wide (in `style.dart`).
+7. **Semantic Search**: The app performs a semantic search by taking the embedding of the user's query and comparing it across the document embeddings stored in Hive.
 
-That way all of our UI is consistent and easy to update.
+8. **Ranking Results**: The chunks are ranked based on the Euclidean distance between the query embedding and document embeddings. The top-ranked chunks are used as the context for the language model (LLM).
 
-## Google Fonts
+9. **Response Generation**: The language model generates an answer based on the context provided by the top-ranked chunks.
 
-To change the font:
+### Technologies Used
 
-1. Go to [Google Fonts](https://fonts.google.com/) and select a font.
-2. Download the font files.
-3. Add the font files to `assets/fonts` (remove the old ones).
-4. Update `style.dart` with the new font (i.e. `return GoogleFonts.rubikTextTheme(textTheme)`).
+- **Flutter**: For cross-platform mobile application development.
+- **Hive**: For local storage of chunk embeddings.
+- **Gemini Embeddings API**: For generating vector embeddings of text.
+- **Gemini (LLM)**: For generating responses based on context.
+- **Riverpod**: For managing states across the app.
 
-## Useful GitHub Pull Request Settings
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-I've found that turning on these 2 settings in GitHub repo settings helps a lot:
+<!-- GETTING STARTED -->
+## Getting Started
 
-1. `Always suggest updating pull request branches`
-2. `Automatically delete head branches`
 
-# FAQ
+### Prerequisites
 
-## Why bloc and not X?
+Need the latest flutter version & a gemini api key from [here](https://makersuite.google.com/app/apikey)
 
-While GetX, Provider, Riverpod, MobX, Redux, etc. are all great solutions,
-most of them are too forgiving. They allow us to access and change state globally.
+```bash
+  flutter upgrade
+```
 
-Whereas [flutter_bloc](https://bloclibrary.dev/) forces us to have `BuildContext`
-in order to access and change the state. The stricter the rules, the harder it is to make mistakes.
+### Installation
 
-And flutter_bloc has a great [architecture proposal](https://bloclibrary.dev/#/architecture) that
-scales well.
+1. Clone the repository from GitHub:
 
-## Who is AI Buddy App for?
+```bash
+git clone https://github.com/yatendra2001/ai_buddy.git
+```
 
-AI Buddy App is for developers, agencies, and founders who want to:
+2. Get all dependencies:
+```bash
+flutter pub get
+```
 
-- build AI Buddy apps
-- save weeks of development time
-- learn best practices
+3. Run the app:
 
-## Where to learn Flutter basics?
+```bash
+flutter run
+```
 
-I can only recommend what I've used myself:
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-- [Flutter Codelabs](https://docs.flutter.dev/codelabs)
-- [Flutter YouTube](https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw)
-- [Effective Dart](https://dart.dev/guides/language/effective-dart)
-- and just keep building apps and getting better with each one :)
 
-## What if I don't need a specific feature?
+<!-- CONTRIBUTING -->
+## Contributing
 
-If you don't need a feature:
+Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-- delete its imported package in `pubspec.yaml`
-- delete the code that uses the feature
 
-## What if I want more?
+Contribution to the project can be made if you have some improvements for the project or if you find some bugs.
+You can contribute to the project by reporting issues, forking it, modifying the code and making a pull request to the repository.
 
-If you want Firebase integration, notifications, in-app purchases and more,
-[get the Pro version here](https://AIBuddy.com/):
+Please make sure you specify the commit type when opening pull requests:
 
-# Resources
+```
+feat: The new feature you're proposing
 
-Build your app icon in minutes (free): [Icon Kitchen](https://icon.kitchen/)
+fix: A bug fix in the project
 
-Cool illustrations that match your app's colors (free): [unDraw](https://undraw.co/illustrations)
+style: Feature and updates related to UI improvements and styling
 
-CI/CD for mobile apps (free & paid): [Codemagic](https://codemagic.io/)
+test: Everything related to testing
 
-Want me to launch your MVP in 4 weeks (premium)?
-[Go to App Launch Program](https://applaunchprogram.com/)
+docs: Everything related to documentation
 
-Need a Flutter Expert (paid)? [Go to Flutter Devs Board](https://flutterdevsboard.com/)
+refactor: Regular code refactoring and maintenance
+```
 
-# Feedback
+To know more extensively about how to contribute to this project, read our [Contribution Guide](https://github.com/yatendra2001/ai_buddy/blob/main/CONTRIBUTING.md).
 
-Found an issue or want to request a feature? Open
-an [issue](https://github.com/Gradoid/ai_buddy/issues)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Have a question? Ask me on [LinkedIn](https://www.linkedin.com/in/milos-jokic/)
-or [Twitter](https://twitter.com/miloshjokic).
 
-Enjoying AI Buddy App? [Leave a testimonial](https://testimonial.to/scalable-flutter-app)
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+
+Twitter: [@iamyatendrak](https://twitter.com/iamyatendrak)
+
+LinkedIn: [linkedin](https://www.linkedin.com/in/iamyatendrak/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/yatendra2001/ai_buddy.svg?style=for-the-badge
+[contributors-url]: https://github.com/yatendra2001/ai_buddy/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/yatendra2001/ai_buddy.svg?style=for-the-badge
+[forks-url]: https://github.com/yatendra2001/ai_buddy/network/members
+[stars-shield]: https://img.shields.io/github/stars/yatendra2001/ai_buddy.svg?style=for-the-badge
+[stars-url]: https://github.com/yatendra2001/ai_buddy/stargazers
+[issues-shield]: https://img.shields.io/github/issues/yatendra2001/ai_buddy.svg?style=for-the-badge
+[issues-url]: https://github.com/yatendra2001/ai_buddy/issues
+[license-shield]: https://img.shields.io/github/license/yatendra2001/ai_buddy.svg?style=for-the-badge
+[license-url]: https://github.com/yatendra2001/ai_buddy/blob/main/LICENSE.txt
