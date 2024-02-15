@@ -8,7 +8,7 @@ class AIBuddy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'AI Buddy App Starter',
+      title: 'AI Buddy',
       theme: darkTheme,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
