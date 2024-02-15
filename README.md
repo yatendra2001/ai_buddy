@@ -22,7 +22,7 @@ AI Buddy is a cross-platform mobile application that leverages the power of AI t
 
 | Chat with PDF | Ask Image | Text Chatbot | 
 | --- | ----------- | ------ | 
-| <img height="600" alt="Chat with PDF" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/66c9a316-0e34-42e4-a791-912e78a582da"> | <img height="600" alt="Ask Image" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/983911b5-22a9-40bf-8a16-7b1294f3e44e"> | <img height="600" alt="Text Chatbot" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/f26221c7-666b-49b3-91ee-47ec17dba728"> |
+| <img height="500" alt="Chat with PDF" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/66c9a316-0e34-42e4-a791-912e78a582da"> | <img height="500" alt="Ask Image" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/983911b5-22a9-40bf-8a16-7b1294f3e44e"> | <img height="500" alt="Text Chatbot" src="https://github.com/yatendra2001/gemini_chat/assets/62821607/f26221c7-666b-49b3-91ee-47ec17dba728"> |
 
 <!-- ARCHITECTURE -->
 ## Architecture
@@ -35,7 +35,7 @@ The "Chat with PDF" feature of the AI Buddy app allows users to interact with th
 
 ### Workflow Diagram
 
-![Chat with PDF Flutter App Architecture](https://github.com/yatendra2001/gemini_chat/assets/62821607/19015b9b-ef95-43fa-b06f-e5acf608bb1b)
+![Chat with PDF Flutter App Architecture](https://github.com/yatendra2001/ai_buddy/assets/62821607/71492eb4-0521-43e7-a3ca-f0bdc05c679e)
 
 ### Workflow Steps
 
