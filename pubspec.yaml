@@ -1,5 +1,5 @@
 name: ai_buddy
-description: A AI Buddy app.
+description: AI Buddy app.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
