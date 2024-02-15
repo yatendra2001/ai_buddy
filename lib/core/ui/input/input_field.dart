@@ -14,6 +14,21 @@ class InputField extends StatefulWidget {
     super.key,
   });
 
+  const InputField.api({
+    required TextEditingController controller,
+    String label = 'Gemini API Key',
+    TextInputAction textInputAction = TextInputAction.done,
+    Key? key,
+  }) : this(
+          key: key,
+          controller: controller,
+          label: label,
+          textInputAction: textInputAction,
+          keyboardType: TextInputType.url,
+          autofillHints: const [AutofillHints.url],
+          validator: Validators.apiKey,
+        );
+
   final TextEditingController controller;
   final String label;
   final TextInputAction textInputAction;

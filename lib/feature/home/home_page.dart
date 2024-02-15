@@ -207,18 +207,17 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 onPressed: () async {
                                   final apiKey =
                                       await SecureStorage().getApiKey();
+                                  final TextEditingController apiKeyController =
+                                      TextEditingController(text: apiKey);
                                   await showModalBottomSheet<void>(
                                     context: context,
-                                    isScrollControlled: false,
+                                    isScrollControlled: true,
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.vertical(
                                         top: Radius.circular(20),
                                       ),
                                     ),
                                     builder: (context) {
-                                      final TextEditingController
-                                          apiKeyController =
-                                          TextEditingController(text: apiKey);
                                       return APIKeyBottomSheet(
                                         apiKeyController: apiKeyController,
                                         isCalledFromHomePage: true,

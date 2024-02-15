@@ -22,9 +22,11 @@ class APIKeyBottomSheet extends StatefulWidget {
 
 class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
   bool _isLoading = false;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Form(
+      key: _formKey,
       child: Padding(
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -44,15 +46,16 @@ class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
                 margin: const EdgeInsets.only(bottom: 8),
               ),
               const SizedBox(height: 16),
-              InputField(
+              InputField.api(
                 controller: widget.apiKeyController,
-                label: 'Gemini API Key',
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.url,
               ),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () async {
+                  if (!_formKey.currentState!.validate()) {
+                    return;
+                  }
+                  context.closeKeyboard();
                   final apiKey = widget.apiKeyController.text;
                   if (apiKey.isNotEmpty) {
                     setState(() {
