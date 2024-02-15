@@ -70,8 +70,6 @@ The "Chat with PDF" feature of the AI Buddy app allows users to interact with th
 - **Gemini (LLM)**: For generating responses based on context.
 - **Riverpod**: For managing states across the app.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -103,8 +101,6 @@ flutter pub get
 flutter run
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -133,16 +129,11 @@ refactor: Regular code refactoring and maintenance
 
 To know more extensively about how to contribute to this project, read our [Contribution Guide](https://github.com/yatendra2001/ai_buddy/blob/main/CONTRIBUTING.md).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
@@ -152,9 +143,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Twitter: [@iamyatendrak](https://twitter.com/iamyatendrak)
 
 LinkedIn: [linkedin](https://www.linkedin.com/in/iamyatendrak/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
