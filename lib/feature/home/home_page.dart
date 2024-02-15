@@ -111,6 +111,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final chatBotsList = ref.watch(chatBotListProvider);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: _isBuildingChatBot
           ? _buildLoadingIndicator(currentState)
           : SafeArea(
