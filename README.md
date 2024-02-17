@@ -128,7 +128,7 @@ To know more extensively about how to contribute to this project, read our [Cont
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the AGPL-3.0 license. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
