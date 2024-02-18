@@ -9,7 +9,7 @@
   </a>
   <h1 align="center" >AI Buddy</h1>
   <h4 align="center">
-    Your personal completely open-sourced and free-to-use AI buddy, built with gemini & flutter.
+    Your personal completely open-sourced and free-to-use AI assistant, built with gemini & flutter.
   </h4>
 </div>
 
