@@ -139,7 +139,7 @@ Twitter: [@iamyatendrak](https://twitter.com/iamyatendrak)
 
 LinkedIn: [linkedin](https://www.linkedin.com/in/iamyatendrak/)
 
-### Make sure to leave a ⭐️
+### Make sure to leave us a ⭐️
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
