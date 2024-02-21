@@ -45,130 +45,134 @@ class ChatPage extends ConsumerWidget {
     }).toList()
       ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
 
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              left: -300,
-              top: -00,
-              child: Container(
-                height: 500,
-                width: 600,
-                decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    colors: [
-                      color.withOpacity(0.5),
-                      context.colorScheme.background.withOpacity(0.5),
-                    ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Positioned(
+                left: -300,
+                top: -00,
+                child: Container(
+                  height: 500,
+                  width: 600,
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      colors: [
+                        color.withOpacity(0.5),
+                        context.colorScheme.background.withOpacity(0.5),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            CustomPaint(
-              painter: BackgroundCurvesPainter(),
-              size: Size.infinite,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: context.colorScheme.onSurface,
+              CustomPaint(
+                painter: BackgroundCurvesPainter(),
+                size: Size.infinite,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: context.colorScheme.onSurface,
+                          ),
+                          onPressed: () {
+                            ref
+                                .read(chatBotListProvider.notifier)
+                                .updateChatBotOnHomeScreen(chatBot);
+                            context.pop();
+                          },
                         ),
-                        onPressed: () {
-                          ref
-                              .read(chatBotListProvider.notifier)
-                              .updateChatBotOnHomeScreen(chatBot);
-                          context.pop();
-                        },
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.symmetric(vertical: 16),
-                        width: 120,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              offset: const Offset(4, 4),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Text(
-                            '$title Buddy',
-                            style: TextStyle(
-                              color: context.colorScheme.surface,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.symmetric(vertical: 16),
+                          width: 120,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                offset: const Offset(4, 4),
+                                blurRadius: 8,
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              '$title Buddy',
+                              style: TextStyle(
+                                color: context.colorScheme.surface,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      if (chatBot.typeOfBot == TypeOfBot.image)
-                        CircleAvatar(
-                          maxRadius: 21,
-                          backgroundImage: FileImage(
-                            File(chatBot.attachmentPath!),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              showDialog<AlertDialog>(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    content: SingleChildScrollView(
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.file(
-                                          File(chatBot.attachmentPath!),
+                        if (chatBot.typeOfBot == TypeOfBot.image)
+                          CircleAvatar(
+                            maxRadius: 21,
+                            backgroundImage: FileImage(
+                              File(chatBot.attachmentPath!),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                showDialog<AlertDialog>(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      content: SingleChildScrollView(
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          child: Image.file(
+                                            File(chatBot.attachmentPath!),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('Close'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: const SizedBox.shrink(),
-                          ),
-                        )
-                      else
-                        const SizedBox(width: 42),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Expanded(
-                    child: ChatInterfaceWidget(
-                      messages: messages,
-                      chatBot: chatBot,
-                      color: color,
-                      imagePath: imagePath,
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Close'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: const SizedBox.shrink(),
+                            ),
+                          )
+                        else
+                          const SizedBox(width: 42),
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Expanded(
+                      child: ChatInterfaceWidget(
+                        messages: messages,
+                        chatBot: chatBot,
+                        color: color,
+                        imagePath: imagePath,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
