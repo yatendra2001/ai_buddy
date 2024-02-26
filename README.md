@@ -1,3 +1,13 @@
+<!-- PROJECT SHIELDS -->
+
+<p align="center">
+  <a href="https://github.com/yatendra2001/ai_buddy/network/members"><img src="https://img.shields.io/github/forks/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="Forks"></a>
+  <a href="https://github.com/yatendra2001/ai_buddy/stargazers"><img src="https://img.shields.io/github/stars/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="Stargazers"></a>
+  <a href="https://github.com/yatendra2001/ai_buddy/issues"><img src="https://img.shields.io/github/issues/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="Issues"></a>
+  <a href="https://github.com/yatendra2001/ai_buddy/blob/main/LICENSE.txt"><img src="https://img.shields.io/github/license/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="GPL License"></a>
+</p>
+
+
 
 <!-- PROJECT LOGO -->
 
