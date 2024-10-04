@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:ai_buddy/core/config/assets_constants.dart';
+import 'package:ai_buddy/core/config/mellowtel.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
     ref.read(chatBotListProvider.notifier).fetchChatBots();
+    startMellowtel(context);
   }
 
   Widget _buildLoadingIndicator(String currentState) {

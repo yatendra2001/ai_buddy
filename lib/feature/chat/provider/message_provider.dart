@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:ai_buddy/core/config/mellowtel.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/config/type_of_message.dart';
 import 'package:ai_buddy/core/logger/logger.dart';
@@ -8,6 +10,7 @@ import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:ai_buddy/feature/hive/model/chat_message/chat_message.dart';
 import 'package:ai_buddy/feature/hive/repository/hive_repository.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
@@ -36,10 +39,9 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
     );
   }
 
-  Future<void> handleSendPressed({
-    required String text,
-    String? imageFilePath,
-  }) async {
+  Future<void> handleSendPressed(
+      {required String text,
+      String? imageFilePath}) async {
     final messageId = uuid.v4();
     final ChatMessage message = ChatMessage(
       id: messageId,

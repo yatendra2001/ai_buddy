@@ -1,3 +1,4 @@
+import 'package:ai_buddy/core/config/mellowtel.dart';
 import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/core/ui/input/input_field.dart';
@@ -23,6 +24,8 @@ class APIKeyBottomSheet extends StatefulWidget {
 class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -100,6 +103,16 @@ class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
                   'Get your Gemini API key from here',
                   style: context.textTheme.labelMedium!.copyWith(
                     color: Colors.blue,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: ()=> showMellowtelSettings(context),
+                child: Text(
+                  'Mellowtel Consent Settings',
+                  style: context.textTheme.labelMedium!.copyWith(
+                    color: context.colorScheme.primary,
                   ),
                 ),
               ),
