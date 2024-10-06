@@ -5,13 +5,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mellowtel/mellowtel.dart';
 
 Mellowtel get mellowtel {
-  print(dotenv.env['MELLOWTEL_KEY']);
   return Mellowtel(dotenv.env['MELLOWTEL_KEY'] ?? '',
       appName: 'AI Buddy',
       appIcon: 'assets/images/app_logo.png',
       incentive: 'Help us continue building AI Buddy',
-      yesText: '',
-      showDebugLogs: true);
+      yesText: '',);
 }
 
 Future<void> startMellowtel(
@@ -24,7 +22,7 @@ Future<void> startMellowtel(
         context,
         onOptIn: () async {},
         onOptOut: () async {},
-        showConsentDialog: showConsentDialog);
+        showConsentDialog: showConsentDialog,);
   }
 }
 

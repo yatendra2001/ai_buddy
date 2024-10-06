@@ -25,7 +25,6 @@ class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -107,16 +106,31 @@ class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
                 ),
               ),
               const SizedBox(height: 16),
-              TextButton(
-                onPressed: ()=> showMellowtelSettings(context),
-                child: Text(
-                  'Mellowtel Consent Settings',
-                  style: context.textTheme.labelMedium!.copyWith(
-                    color: context.colorScheme.primary,
-                  ),
-                ),
+              FutureBuilder<String?>(
+                future: SecureStorage().getApiKey(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox.shrink();
+                  }
+                  if (snapshot.hasData && snapshot.data != null) {
+                    return Column(
+                      children: [
+                        TextButton(
+                          onPressed: () => showMellowtelSettings(context),
+                          child: Text(
+                            'Mellowtel Consent Settings',
+                            style: context.textTheme.labelMedium!.copyWith(
+                              color: context.colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
-              const SizedBox(height: 16),
             ],
           ),
         ),
