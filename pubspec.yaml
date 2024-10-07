@@ -37,8 +37,7 @@ dependencies:
 
   # iOS
   cupertino_icons: ^1.0.2
-  mellowtel: ^0.0.3
-  flutter_dotenv: ^5.1.0
+  mellowtel: ^0.0.4
 
 dev_dependencies:
   flutter_test:
@@ -58,4 +57,3 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/animations/
-    - .env

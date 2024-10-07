@@ -3,7 +3,6 @@ import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -20,7 +19,6 @@ Future<void> main() async {
     ..init(appDocumentDir.path)
     ..registerAdapter(ChatBotAdapter());
   await Hive.openBox<ChatBot>('chatbots');
-  await dotenv.load(fileName: '.env');
   runApp(
     const ProviderScope(
       child: AIBuddy(),

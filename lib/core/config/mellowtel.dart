@@ -1,16 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mellowtel/mellowtel.dart';
 
-Mellowtel get mellowtel {
-  return Mellowtel(dotenv.env['MELLOWTEL_KEY'] ?? '',
+final mellowtel = Mellowtel('7478a4e8',
       appName: 'AI Buddy',
       appIcon: 'assets/images/app_logo.png',
       incentive: 'Help us continue building AI Buddy',
       yesText: '',);
-}
 
 Future<void> startMellowtel(
   BuildContext context, {
