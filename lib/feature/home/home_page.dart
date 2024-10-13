@@ -126,14 +126,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                       decoration: BoxDecoration(
                         gradient: RadialGradient(
                           colors: [
-                            Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.3),
-                            Theme.of(context)
-                                .colorScheme
-                                .background
-                                .withOpacity(0.5),
+                            context.colorScheme.primary.withOpacity(0.3),
+                            context.colorScheme.background.withOpacity(0.5),
                           ],
                         ),
                       ),
@@ -192,9 +186,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             ),
                             CircleAvatar(
                               maxRadius: 16,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
+                              backgroundColor: context.colorScheme.onSurface
                                   .withOpacity(0.2),
                               child: IconButton(
                                 icon: const Icon(
@@ -238,9 +230,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'How may I help\nyou today?',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
+                              style: context.textTheme.bodyLarge!
                                   .copyWith(fontSize: 32),
                             ),
                           ),
@@ -378,33 +368,25 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 children: [
                                   Text(
                                     'History',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 18,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary
-                                              .withOpacity(0.95),
-                                        ),
+                                    style:
+                                        context.textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18,
+                                      color: context.colorScheme.onPrimary
+                                          .withOpacity(0.95),
+                                    ),
                                   ),
                                   TextButton(
                                     onPressed: () => _showAllHistory(context),
                                     child: Text(
                                       'See all',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSurface
-                                                .withOpacity(0.8),
-                                          ),
+                                      style:
+                                          context.textTheme.bodyLarge!.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: context.colorScheme.onSurface
+                                            .withOpacity(0.8),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -422,17 +404,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                                       const SizedBox(width: 12),
                                       Text(
                                         'No chats yet',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
+                                        style: context.textTheme.bodyLarge!
                                             .copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 18,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary
-                                                  .withOpacity(0.95),
-                                            ),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          color: context.colorScheme.onPrimary
+                                              .withOpacity(0.95),
+                                        ),
                                       ),
                                       const Icon(CupertinoIcons.cube_box),
                                       const SizedBox(width: 12),
@@ -461,12 +439,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                                       chatBot.typeOfBot == TypeOfBot.pdf
                                           ? context.colorScheme.primary
                                           : chatBot.typeOfBot == TypeOfBot.text
-                                              ? Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary
-                                              : Theme.of(context)
-                                                  .colorScheme
-                                                  .tertiary;
+                                              ? context.colorScheme.secondary
+                                              : context.colorScheme.tertiary;
                                   return HistoryItem(
                                     label: chatBot.title,
                                     imagePath: imagePath,
