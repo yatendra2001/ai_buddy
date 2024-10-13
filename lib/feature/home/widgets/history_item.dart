@@ -60,8 +60,7 @@ class HistoryItem extends ConsumerWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodyMedium!.copyWith(
-                  color:
-                      Theme.of(context).colorScheme.onPrimary.withOpacity(0.95),
+                  color: context.colorScheme.onPrimary.withOpacity(0.95),
                 ),
               ),
             ),
