@@ -26,14 +26,8 @@ class WelcomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: RadialGradient(
                       colors: [
-                        Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(0.3),
-                        Theme.of(context)
-                            .colorScheme
-                            .background
-                            .withOpacity(0.5),
+                        context.colorScheme.onSurface.withOpacity(0.3),
+                        context.colorScheme.background.withOpacity(0.5),
                       ],
                     ),
                   ),
