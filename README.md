@@ -1,3 +1,13 @@
+<!-- PROJECT SHIELDS -->
+
+<p align="center">
+  <a href="https://github.com/yatendra2001/ai_buddy/network/members"><img src="https://img.shields.io/github/forks/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="Forks"></a>
+  <a href="https://github.com/yatendra2001/ai_buddy/stargazers"><img src="https://img.shields.io/github/stars/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="Stargazers"></a>
+  <a href="https://github.com/yatendra2001/ai_buddy/issues"><img src="https://img.shields.io/github/issues/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="Issues"></a>
+  <a href="https://github.com/yatendra2001/ai_buddy/blob/main/LICENSE.txt"><img src="https://img.shields.io/github/license/yatendra2001/ai_buddy.svg?style=for-the-badge" alt="GPL License"></a>
+</p>
+
+
 
 <!-- PROJECT LOGO -->
 
@@ -11,7 +21,17 @@
   <h4 align="center">
     Your personal completely open-sourced and free-to-use AI assistant, built with gemini & flutter.
   </h4>
-</div>
+  
+  <!-- Download Buttons -->
+  <div>
+    <a href="https://play.google.com/store/apps/details?id=com.superawesomeapps.ai_buddy">
+      <img width="135" alt="Store=Google Play, Style=Black" src="https://github.com/yatendra2001/ai_buddy/assets/62821607/9b03e51f-7bbf-40c7-bcdc-b1888f165fbb">
+    </a>
+    <a href="https://apple.co/3OSmiDd">
+      <img width="120" alt="Store=App Store, Style=Black" src="https://github.com/yatendra2001/ai_buddy/assets/62821607/6c8c9e04-f66f-4fe8-a4b0-167324326f17">
+    </a>
+  </div>
+</div> 
 
 
 

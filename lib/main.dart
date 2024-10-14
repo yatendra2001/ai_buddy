@@ -19,7 +19,6 @@ Future<void> main() async {
     ..init(appDocumentDir.path)
     ..registerAdapter(ChatBotAdapter());
   await Hive.openBox<ChatBot>('chatbots');
-
   runApp(
     const ProviderScope(
       child: AIBuddy(),

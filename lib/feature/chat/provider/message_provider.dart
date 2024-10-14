@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:io';
-
 import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/config/type_of_message.dart';
 import 'package:ai_buddy/core/logger/logger.dart';
@@ -36,10 +36,9 @@ class MessageListNotifier extends StateNotifier<ChatBot> {
     );
   }
 
-  Future<void> handleSendPressed({
-    required String text,
-    String? imageFilePath,
-  }) async {
+  Future<void> handleSendPressed(
+      {required String text,
+      String? imageFilePath,}) async {
     final messageId = uuid.v4();
     final ChatMessage message = ChatMessage(
       id: messageId,
