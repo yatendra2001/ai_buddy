@@ -49,6 +49,7 @@ dev_dependencies:
   hive_generator: ^2.0.0
   json_serializable: ^6.7.1
   mockito: ^5.4.4
+  msix: ^3.16.7
 
 flutter:
   uses-material-design: true
@@ -57,3 +58,11 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/animations/
+
+msix_config:
+  display_name: AI Buddy
+  publisher_display_name: SuperAwesomeApps
+  identity_name: com.superawesomeapps.ai-buddy
+  msix_version: 1.0.0.0
+  logo_path: assets/images/app_icon.png
+  capabilities: internetClient
