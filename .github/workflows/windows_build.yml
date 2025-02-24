@@ -40,16 +40,14 @@ jobs:
         run: flutter pub run msix:create
 
       - name: List Build Directory
-        run: dir build\windows\runner\Release
+        run: dir build\windows\x64\runner\Release
         shell: cmd
 
       - name: Upload Windows Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: |
-            build/windows/x64/runner/Release/
-            build/windows/x64/runner/Release/*.msix
+          path: build/windows/x64/runner/Release/
           compression-level: 9
           retention-days: 90
 
@@ -57,9 +55,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            build/windows/x64/runner/Release/*.exe
-            build/windows/x64/runner/Release/*.msix
+          files: build/windows/x64/runner/Release/*
           tag_name: v${{ github.run_number }}
           name: Release v${{ github.run_number }}
           draft: false
