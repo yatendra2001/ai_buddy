@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -22,7 +22,7 @@ jobs:
           cache: true
 
       - name: Install Visual Studio build tools
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.1
 
       - name: Enable Windows Desktop
         run: flutter config --enable-windows-desktop
@@ -37,16 +37,18 @@ jobs:
         run: flutter pub run msix:create
 
       - name: Upload Windows Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: windows-build
           path: |
             build/windows/runner/Release/
             build/windows/runner/Release/*.msix
+          compression-level: 9
+          retention-days: 90
 
       - name: Create Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             build/windows/runner/Release/*.exe
