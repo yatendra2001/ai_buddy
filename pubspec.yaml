@@ -37,7 +37,7 @@ dependencies:
 
   # iOS
   cupertino_icons: ^1.0.2
-  mellowtel: ^0.0.4
+  mellowtel: 0.0.3  # Downgraded to version that uses older connectivity_plus
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +50,9 @@ dev_dependencies:
   json_serializable: ^6.7.1
   mockito: ^5.4.4
   msix: ^3.16.7
+
+dependency_overrides:
+  web: ^0.3.0  # Force web package version to match Flutter SDK requirement
 
 flutter:
   uses-material-design: true
