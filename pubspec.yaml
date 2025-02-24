@@ -52,6 +52,7 @@ dev_dependencies:
 
 dependency_overrides:
   web: ^0.3.0  # Force web package version to match Flutter SDK requirement
+  google_fonts: 6.1.0
 
 flutter:
   uses-material-design: true

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:ai_buddy/core/app/app.dart';
 import 'package:ai_buddy/feature/hive/model/chat_bot/chat_bot.dart';
 import 'package:flutter/foundation.dart';
