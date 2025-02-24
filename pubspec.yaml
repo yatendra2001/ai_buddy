@@ -67,5 +67,11 @@ msix_config:
   publisher_display_name: SuperAwesomeApps
   identity_name: com.superawesomeapps.ai-buddy
   msix_version: 1.0.0.0
-  logo_path: assets/images/app_icon.png
+  logo_path: windows/runner/resources/app_icon.ico
   capabilities: internetClient
+  languages: en-us
+  store: false
+  publisher: CN=SuperAwesomeApps, O=SuperAwesomeApps Corporation, C=US
+  sign_msix: false  # Set to true if you have a code signing certificate
+  certificate_path: null
+  certificate_password: null
