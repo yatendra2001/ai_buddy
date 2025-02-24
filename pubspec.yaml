@@ -37,7 +37,7 @@ dependencies:
 
   # iOS
   cupertino_icons: ^1.0.2
-  mellowtel: 0.0.3  # Downgraded to version that uses older connectivity_plus
+  mellowtel: ^0.0.4  # Downgraded to version that uses older connectivity_plus
 
 dev_dependencies:
   flutter_test:

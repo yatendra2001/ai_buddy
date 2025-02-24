@@ -881,10 +881,10 @@ packages:
     dependency: "direct main"
     description:
       name: mellowtel
-      sha256: d8629eddb6cedda85b3bf8c1d1358bb37c5a3342e93d818d31f173c0c2e72c61
+      sha256: c0fcceb280ff2519ad7850c9b662172626a05ba1d388c1ac94031382a4b8326f
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   meta:
     dependency: transitive
     description:
