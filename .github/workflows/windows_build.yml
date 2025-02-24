@@ -7,6 +7,9 @@ on:
     branches: ["main"]
   workflow_dispatch: # Allows manual triggering
 
+permissions:
+  contents: write # Add permission to create releases
+
 jobs:
   build:
     runs-on: windows-latest
@@ -36,13 +39,17 @@ jobs:
       - name: Create MSIX Package
         run: flutter pub run msix:create
 
+      - name: List Build Directory
+        run: dir build\windows\runner\Release
+        shell: cmd
+
       - name: Upload Windows Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
           path: |
-            build/windows/runner/Release/
-            build/windows/runner/Release/*.msix
+            build/windows/x64/runner/Release/
+            build/windows/x64/runner/Release/*.msix
           compression-level: 9
           retention-days: 90
 
@@ -51,8 +58,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            build/windows/runner/Release/*.exe
-            build/windows/runner/Release/*.msix
+            build/windows/x64/runner/Release/*.exe
+            build/windows/x64/runner/Release/*.msix
           tag_name: v${{ github.run_number }}
           name: Release v${{ github.run_number }}
           draft: false
