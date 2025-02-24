@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ai_buddy/core/config/assets_constants.dart';
-import 'package:ai_buddy/core/config/mellowtel.dart';
 import 'package:ai_buddy/core/config/type_of_bot.dart';
 import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/feature/chat/provider/message_provider.dart';
@@ -89,7 +88,6 @@ class ChatPage extends ConsumerWidget {
                                 .read(chatBotListProvider.notifier)
                                 .updateChatBotOnHomeScreen(chatBot);
                             context.pop();
-                            startMellowtel(context, showConsentDialog: true);
                           },
                         ),
                         Container(
